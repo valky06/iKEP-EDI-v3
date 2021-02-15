@@ -225,7 +225,11 @@ Public Class F_ImportCdeVente
 
         'TODO:        If dModifFin.Checked Then sSql &= " AND date1ereModif <= " & Date2sql(dModifFin.Value)
         sSql &= FiltreMsg
+        sSql &= " and NumCdeEDI_Tiers not in (   select distinct NumCdeEDI from CommandeVente_Transfert where ImportId = " & lImportId & " and statutaffiche=1)"
         sSql &= "order by NumCdeEDI_Tiers, article, NumLigneEDI_Tiers, dateLigne"
+
+
+
 
         lers = SqlLit(sSql, conSqlEDI)
         While lers.Read
@@ -765,7 +769,6 @@ Public Class F_ImportCdeVente
         Else
             If MsgBox("Transferer les commandes sélectionnées ?", MsgBoxStyle.OkCancel Or MsgBoxStyle.Question) = MsgBoxResult.Ok Then
                 Try
-                    sSql &= "DELETE CommandeVente_Transfert WHERE ImportId = 0" & lImportId & ";"
                     'Ecrit dans la table Transfert
                     For i = 0 To Me.gImport.RowCount - 2
 
@@ -773,13 +776,13 @@ Public Class F_ImportCdeVente
                             If Nz(.Cells(0).Value, False) = True Then
                                 'Archivage transfert
                                 'd = .Cells("DateBesoin").Value
-                                sSql &= "INSERT INTO CommandeVente_Transfert (lId, ImportId, NumCdeEDI, NumLigneEDI, Article, ArtDesc, TypeBesoin, DateBesoin, QteBesoin, TypeCde_ERP, NumCde_ERP, NumLigne_ERP, DateCde, QteCde, ArtCode_ERP, NumLigne_Prop, DateTransfert, StatutTransfert, CodeClient, StatutAffiche )" _
+                                sSql &= "INSERT INTO CommandeVente_Transfert (lId, ImportId, NumCdeEDI, NumLigneEDI, Article, ArtDesc, TypeBesoin, DateBesoin, QteBesoin, TypeCde_ERP, NumCde_ERP, NumLigne_ERP, DateCde, QteCde, ArtCode_ERP, NumLigne_Prop, DateTransfert, StatutTransfert, CodeClient, StatutAffiche,siteId )" _
                                 & " VALUES (" _
                                 & "'" & .Cells("lId").Value & "', 0" & lImportId & ", " _
                                 & "'" & Nz(.Cells("NumCdeEDI_Tiers").Value, "") & "', '" & Nz(.Cells("NumLigneEDI_Tiers").Value, "") & "', '" & Nz(.Cells("ArtCode_Tiers").Value, "") & "', '" & Nz(.Cells("ArtDesc_Tiers").Value, "").Replace("'", "''") & "', " _
                                 & "'" & Nz(.Cells("TypeBesoin").Value, "") & "', '" & Nz(.Cells("DateBesoin").Value, "") & "', 0" & Txt2sql(Nz(.Cells("QteBesoin").Value, "0")) & ", '" & Nz(.Cells("TypeCde_ERP").Value, "") & "', " _
                                 & "'" & Nz(.Cells("NumCde_ERP").Value, "") & "', '" & Nz(.Cells("NumLigneCde_ERP").Value, "") & "', '" & Nz(.Cells("DateCde").Value, "") & "', 0" & Txt2sql(Nz(.Cells("QteCde").Value, "0")) & ", " _
-                                & "'" & Nz(.Cells("ArtCode_ERP").Value, "") & "', '" & Nz(.Cells("NumLigne_Prop").Value, "") & "', '" & Now & "', 'D', '" & .Cells("CodeClient").Value & "', 1);"
+                                & "'" & Nz(.Cells("ArtCode_ERP").Value, "") & "', '" & Nz(.Cells("NumLigne_Prop").Value, "") & "', '" & Now & "', 'D', '" & .Cells("CodeClient").Value & "', 1," & Me.lSite.SelectedItem.value & ")"
                             End If
                         End With
                     Next i
