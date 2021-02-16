@@ -157,15 +157,12 @@ Public Class F_ImportCdeVente
         Me.tabAnomalies.Text = "Anomalies Contrat/Cde (" & nbAnoCde + nbAnocontrat & ")"
     End Sub
 
-
     Sub ListeAnomalies()
         StatutBar("Lecture des anomalies EDI")
         ListeAnomalieEDI(False)
-
         StatutBar("Lecture des anomalies commandes")
         ListeAnomalieCde(False)
     End Sub
-
 
     Sub ListeCommande()
         Dim lers As OleDb.OleDbDataReader
@@ -519,7 +516,7 @@ Public Class F_ImportCdeVente
         optionC.Checked = b
         optionD.Checked = b
         optionL.Checked = b
-
+        optionS.Checked = b
     End Sub
 
     Public Sub MakeGridViewDoubleBuffered(ByVal dgv As DataGridView)
@@ -789,11 +786,11 @@ Public Class F_ImportCdeVente
 
                     SqlDo(sSql, conSqlEDI)
 
-                    'lesParam.Clear()
-                    'lesParam.Add(New SSISParam("ImportId", lImportId, "PACKAGE"))
-                    'lesParam.Add(New SSISParam("TiersId", lTiers.SelectedItem.value, "PACKAGE"))
-                    'lesParam.Add(New SSISParam("UserLogin", leUser.Login, "PACKAGE"))
-                    'SSISexecute(leUser.RepSSIS, "DM_IN_CDV_Integre.dtsx", lesParam, "Ecriture des données -> ERP")
+                    lesParam.Clear()
+                    lesParam.Add(New SSISParam("ImportId", lImportId, "PACKAGE"))
+                    lesParam.Add(New SSISParam("TiersId", lTiers.SelectedItem.value, "PACKAGE"))
+                    lesParam.Add(New SSISParam("UserLogin", leUser.Login, "PACKAGE"))
+                    SSISexecute(leUser.RepSSIS, "DM_IN_CDV_Integre.dtsx", lesParam, "Ecriture des données -> ERP")
 
                 Catch ex As Exception
                     MsgBox(ex.Message)
