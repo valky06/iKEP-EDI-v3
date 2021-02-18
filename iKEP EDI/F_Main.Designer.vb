@@ -40,13 +40,14 @@ Partial Class F_Main
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.mParam = New System.Windows.Forms.ToolStripMenuItem()
         Me.AideEnLigneToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.sContext = New System.Windows.Forms.ToolStripStatusLabel()
         Me.sStatus.SuspendLayout()
         Me.mGlobal.SuspendLayout()
         Me.SuspendLayout()
         '
         'sStatus
         '
-        Me.sStatus.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.sLabel, Me.sUser, Me.tVersion})
+        Me.sStatus.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.sLabel, Me.sContext, Me.sUser, Me.tVersion})
         Me.sStatus.Location = New System.Drawing.Point(0, 659)
         Me.sStatus.Name = "sStatus"
         Me.sStatus.Size = New System.Drawing.Size(1280, 22)
@@ -56,7 +57,7 @@ Partial Class F_Main
         'sLabel
         '
         Me.sLabel.Name = "sLabel"
-        Me.sLabel.Size = New System.Drawing.Size(1190, 17)
+        Me.sLabel.Size = New System.Drawing.Size(1141, 17)
         Me.sLabel.Spring = True
         Me.sLabel.Text = "Etat"
         Me.sLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft
@@ -122,37 +123,43 @@ Partial Class F_Main
         'TiersToolStripMenuItem
         '
         Me.TiersToolStripMenuItem.Name = "TiersToolStripMenuItem"
-        Me.TiersToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TiersToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.TiersToolStripMenuItem.Text = "Tiers"
         '
         'mUtil
         '
         Me.mUtil.Name = "mUtil"
-        Me.mUtil.Size = New System.Drawing.Size(180, 22)
+        Me.mUtil.Size = New System.Drawing.Size(166, 22)
         Me.mUtil.Text = "Utilisateur"
         '
         'mConfig
         '
         Me.mConfig.Name = "mConfig"
-        Me.mConfig.Size = New System.Drawing.Size(180, 22)
+        Me.mConfig.Size = New System.Drawing.Size(166, 22)
         Me.mConfig.Text = "Config Utilisateur"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(163, 6)
         '
         'mParam
         '
         Me.mParam.Name = "mParam"
-        Me.mParam.Size = New System.Drawing.Size(180, 22)
+        Me.mParam.Size = New System.Drawing.Size(166, 22)
         Me.mParam.Text = "Paramètres"
         '
         'AideEnLigneToolStripMenuItem
         '
         Me.AideEnLigneToolStripMenuItem.Name = "AideEnLigneToolStripMenuItem"
-        Me.AideEnLigneToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AideEnLigneToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.AideEnLigneToolStripMenuItem.Text = "Aide en ligne"
+        '
+        'sContext
+        '
+        Me.sContext.Name = "sContext"
+        Me.sContext.Size = New System.Drawing.Size(49, 17)
+        Me.sContext.Text = "Context"
         '
         'F_Main
         '
@@ -192,4 +199,5 @@ Partial Class F_Main
     Friend WithEvents mParam As ToolStripMenuItem
     Friend WithEvents AideEnLigneToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TiersToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents sContext As ToolStripStatusLabel
 End Class

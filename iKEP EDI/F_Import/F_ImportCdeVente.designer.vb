@@ -25,14 +25,6 @@ Partial Class F_ImportCdeVente
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(F_ImportCdeVente))
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -42,6 +34,14 @@ Partial Class F_ImportCdeVente
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(F_ImportCdeVente))
         Me.oFileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.tabImport = New System.Windows.Forms.TabPage()
         Me.optionS = New System.Windows.Forms.CheckBox()
@@ -66,9 +66,36 @@ Partial Class F_ImportCdeVente
         Me.bTransfert = New System.Windows.Forms.Button()
         Me.bAfficher = New System.Windows.Forms.Button()
         Me.gImport = New System.Windows.Forms.DataGridView()
+        Me.SelContrat = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.NumCdeEDI_Tiers = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NumLigneEDI_Tiers = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ArtCode_Tiers = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ArtDesc_Tiers = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateBesoin = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateCde = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TypeBesoin = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TypeCde_ERP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.QteBesoin = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.QteCde = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.QtePTF = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PuEDI = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PuCde = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ArtCode_ERP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CodeClient = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NumCde_ERP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NumLigneCde_ERP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NumLigne_Prop = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cumul = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PcCumul = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MsgLigne = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.msgLigneCumul = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.msgCde = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.lId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TypeImport = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Tableaux = New System.Windows.Forms.TabControl()
         Me.tabAnomalies = New System.Windows.Forms.TabPage()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.OptionI = New System.Windows.Forms.CheckBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.tCde_AE = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -112,32 +139,6 @@ Partial Class F_ImportCdeVente
         Me.bDoc = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.SelContrat = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.NumCdeEDI_Tiers = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NumLigneEDI_Tiers = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ArtCode_Tiers = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ArtDesc_Tiers = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateBesoin = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateCde = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TypeBesoin = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TypeCde_ERP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.QteBesoin = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.QteCde = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.QtePTF = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PuEDI = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PuCde = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ArtCode_ERP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CodeClient = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NumCde_ERP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NumLigneCde_ERP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NumLigne_Prop = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Cumul = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PcCumul = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MsgLigne = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.msgLigneCumul = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.msgCde = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.lId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TypeImport = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabImport.SuspendLayout()
         CType(Me.gImport, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Tableaux.SuspendLayout()
@@ -456,6 +457,247 @@ Partial Class F_ImportCdeVente
         Me.gImport.TabIndex = 8
         Me.gImport.TabStop = False
         '
+        'SelContrat
+        '
+        Me.SelContrat.FillWeight = 15.0!
+        Me.SelContrat.HeaderText = "Sel"
+        Me.SelContrat.Name = "SelContrat"
+        Me.SelContrat.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'NumCdeEDI_Tiers
+        '
+        Me.NumCdeEDI_Tiers.FillWeight = 50.0!
+        Me.NumCdeEDI_Tiers.HeaderText = "Cde EDI"
+        Me.NumCdeEDI_Tiers.Name = "NumCdeEDI_Tiers"
+        Me.NumCdeEDI_Tiers.ReadOnly = True
+        Me.NumCdeEDI_Tiers.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.NumCdeEDI_Tiers.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'NumLigneEDI_Tiers
+        '
+        Me.NumLigneEDI_Tiers.FillWeight = 20.0!
+        Me.NumLigneEDI_Tiers.HeaderText = "Ligne EDI"
+        Me.NumLigneEDI_Tiers.Name = "NumLigneEDI_Tiers"
+        Me.NumLigneEDI_Tiers.ReadOnly = True
+        Me.NumLigneEDI_Tiers.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'ArtCode_Tiers
+        '
+        Me.ArtCode_Tiers.FillWeight = 40.0!
+        Me.ArtCode_Tiers.HeaderText = "Article Tiers"
+        Me.ArtCode_Tiers.Name = "ArtCode_Tiers"
+        Me.ArtCode_Tiers.ReadOnly = True
+        Me.ArtCode_Tiers.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ArtCode_Tiers.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'ArtDesc_Tiers
+        '
+        Me.ArtDesc_Tiers.HeaderText = "Desc."
+        Me.ArtDesc_Tiers.Name = "ArtDesc_Tiers"
+        Me.ArtDesc_Tiers.ReadOnly = True
+        Me.ArtDesc_Tiers.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'DateBesoin
+        '
+        DataGridViewCellStyle2.Format = "d"
+        DataGridViewCellStyle2.NullValue = Nothing
+        Me.DateBesoin.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DateBesoin.FillWeight = 30.0!
+        Me.DateBesoin.HeaderText = "Date Besoin"
+        Me.DateBesoin.Name = "DateBesoin"
+        Me.DateBesoin.ReadOnly = True
+        Me.DateBesoin.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DateBesoin.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'DateCde
+        '
+        DataGridViewCellStyle3.Format = "d"
+        DataGridViewCellStyle3.NullValue = Nothing
+        Me.DateCde.DefaultCellStyle = DataGridViewCellStyle3
+        Me.DateCde.FillWeight = 30.0!
+        Me.DateCde.HeaderText = "Date Cde"
+        Me.DateCde.Name = "DateCde"
+        Me.DateCde.ReadOnly = True
+        Me.DateCde.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'TypeBesoin
+        '
+        Me.TypeBesoin.FillWeight = 15.0!
+        Me.TypeBesoin.HeaderText = "Type Besoin"
+        Me.TypeBesoin.Name = "TypeBesoin"
+        Me.TypeBesoin.ReadOnly = True
+        Me.TypeBesoin.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'TypeCde_ERP
+        '
+        Me.TypeCde_ERP.FillWeight = 15.0!
+        Me.TypeCde_ERP.HeaderText = "Type Cde"
+        Me.TypeCde_ERP.Name = "TypeCde_ERP"
+        Me.TypeCde_ERP.ReadOnly = True
+        Me.TypeCde_ERP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'QteBesoin
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle4.Format = "N2"
+        DataGridViewCellStyle4.NullValue = Nothing
+        Me.QteBesoin.DefaultCellStyle = DataGridViewCellStyle4
+        Me.QteBesoin.FillWeight = 25.0!
+        Me.QteBesoin.HeaderText = "Qté Besoin"
+        Me.QteBesoin.Name = "QteBesoin"
+        Me.QteBesoin.ReadOnly = True
+        Me.QteBesoin.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'QteCde
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle5.Format = "N2"
+        Me.QteCde.DefaultCellStyle = DataGridViewCellStyle5
+        Me.QteCde.FillWeight = 25.0!
+        Me.QteCde.HeaderText = "Qté Cde"
+        Me.QteCde.Name = "QteCde"
+        Me.QteCde.ReadOnly = True
+        Me.QteCde.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'QtePTF
+        '
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle6.Format = "N2"
+        Me.QtePTF.DefaultCellStyle = DataGridViewCellStyle6
+        Me.QtePTF.FillWeight = 25.0!
+        Me.QtePTF.HeaderText = "Qté PTF"
+        Me.QtePTF.Name = "QtePTF"
+        Me.QtePTF.ReadOnly = True
+        Me.QtePTF.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'PuEDI
+        '
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle7.Format = "N2"
+        DataGridViewCellStyle7.NullValue = Nothing
+        Me.PuEDI.DefaultCellStyle = DataGridViewCellStyle7
+        Me.PuEDI.FillWeight = 20.0!
+        Me.PuEDI.HeaderText = "PxU Tiers"
+        Me.PuEDI.Name = "PuEDI"
+        Me.PuEDI.ReadOnly = True
+        Me.PuEDI.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.PuEDI.Visible = False
+        '
+        'PuCde
+        '
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle8.Format = "N2"
+        DataGridViewCellStyle8.NullValue = Nothing
+        Me.PuCde.DefaultCellStyle = DataGridViewCellStyle8
+        Me.PuCde.FillWeight = 20.0!
+        Me.PuCde.HeaderText = "PxU Cde"
+        Me.PuCde.Name = "PuCde"
+        Me.PuCde.ReadOnly = True
+        Me.PuCde.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.PuCde.Visible = False
+        '
+        'ArtCode_ERP
+        '
+        Me.ArtCode_ERP.FillWeight = 40.0!
+        Me.ArtCode_ERP.HeaderText = "Article KEP"
+        Me.ArtCode_ERP.Name = "ArtCode_ERP"
+        Me.ArtCode_ERP.ReadOnly = True
+        Me.ArtCode_ERP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'CodeClient
+        '
+        Me.CodeClient.FillWeight = 30.0!
+        Me.CodeClient.HeaderText = "Client"
+        Me.CodeClient.Name = "CodeClient"
+        Me.CodeClient.ReadOnly = True
+        Me.CodeClient.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'NumCde_ERP
+        '
+        Me.NumCde_ERP.FillWeight = 30.0!
+        Me.NumCde_ERP.HeaderText = "N°Cde"
+        Me.NumCde_ERP.Name = "NumCde_ERP"
+        Me.NumCde_ERP.ReadOnly = True
+        Me.NumCde_ERP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'NumLigneCde_ERP
+        '
+        Me.NumLigneCde_ERP.FillWeight = 20.0!
+        Me.NumLigneCde_ERP.HeaderText = "N° Ligne"
+        Me.NumLigneCde_ERP.Name = "NumLigneCde_ERP"
+        Me.NumLigneCde_ERP.ReadOnly = True
+        Me.NumLigneCde_ERP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'NumLigne_Prop
+        '
+        Me.NumLigne_Prop.FillWeight = 20.0!
+        Me.NumLigne_Prop.HeaderText = "N° Ligne Prop"
+        Me.NumLigne_Prop.Name = "NumLigne_Prop"
+        Me.NumLigne_Prop.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Cumul
+        '
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle9.Format = "N2"
+        Me.Cumul.DefaultCellStyle = DataGridViewCellStyle9
+        Me.Cumul.FillWeight = 30.0!
+        Me.Cumul.HeaderText = "Qté Cumul"
+        Me.Cumul.Name = "Cumul"
+        Me.Cumul.ReadOnly = True
+        Me.Cumul.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'PcCumul
+        '
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle10.Format = "N2"
+        Me.PcCumul.DefaultCellStyle = DataGridViewCellStyle10
+        Me.PcCumul.FillWeight = 20.0!
+        Me.PcCumul.HeaderText = "% Cumul"
+        Me.PcCumul.Name = "PcCumul"
+        Me.PcCumul.ReadOnly = True
+        Me.PcCumul.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'MsgLigne
+        '
+        Me.MsgLigne.FillWeight = 20.0!
+        Me.MsgLigne.HeaderText = "Msg Ligne"
+        Me.MsgLigne.Name = "MsgLigne"
+        Me.MsgLigne.ReadOnly = True
+        Me.MsgLigne.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'msgLigneCumul
+        '
+        Me.msgLigneCumul.FillWeight = 20.0!
+        Me.msgLigneCumul.HeaderText = "msgLigneCumul"
+        Me.msgLigneCumul.Name = "msgLigneCumul"
+        Me.msgLigneCumul.ReadOnly = True
+        Me.msgLigneCumul.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.msgLigneCumul.Visible = False
+        '
+        'msgCde
+        '
+        Me.msgCde.FillWeight = 20.0!
+        Me.msgCde.HeaderText = "msgCde"
+        Me.msgCde.Name = "msgCde"
+        Me.msgCde.ReadOnly = True
+        Me.msgCde.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.msgCde.Visible = False
+        '
+        'lId
+        '
+        Me.lId.FillWeight = 20.0!
+        Me.lId.HeaderText = "lId"
+        Me.lId.Name = "lId"
+        Me.lId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.lId.Visible = False
+        '
+        'TypeImport
+        '
+        Me.TypeImport.FillWeight = 30.0!
+        Me.TypeImport.HeaderText = "TypeImport"
+        Me.TypeImport.Name = "TypeImport"
+        Me.TypeImport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
         'Tableaux
         '
         Me.Tableaux.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -494,6 +736,7 @@ Partial Class F_ImportCdeVente
         '
         'SplitContainer1.Panel1
         '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.OptionI)
         Me.SplitContainer1.Panel1.Controls.Add(Me.Label2)
         Me.SplitContainer1.Panel1.Controls.Add(Me.tCde_AE)
         Me.SplitContainer1.Panel1.Controls.Add(Me.Label3)
@@ -518,6 +761,18 @@ Partial Class F_ImportCdeVente
         Me.SplitContainer1.Size = New System.Drawing.Size(1403, 593)
         Me.SplitContainer1.SplitterDistance = 668
         Me.SplitContainer1.TabIndex = 55
+        '
+        'OptionI
+        '
+        Me.OptionI.AutoSize = True
+        Me.OptionI.Checked = True
+        Me.OptionI.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.OptionI.Location = New System.Drawing.Point(191, 27)
+        Me.OptionI.Name = "OptionI"
+        Me.OptionI.Size = New System.Drawing.Size(109, 17)
+        Me.OptionI.TabIndex = 59
+        Me.OptionI.Text = "I: info Manquante"
+        Me.OptionI.UseVisualStyleBackColor = True
         '
         'Label2
         '
@@ -648,7 +903,7 @@ Partial Class F_ImportCdeVente
         Me.OptionA.AutoSize = True
         Me.OptionA.Checked = True
         Me.OptionA.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.OptionA.Location = New System.Drawing.Point(207, 5)
+        Me.OptionA.Location = New System.Drawing.Point(191, 5)
         Me.OptionA.Name = "OptionA"
         Me.OptionA.Size = New System.Drawing.Size(125, 17)
         Me.OptionA.TabIndex = 43
@@ -956,247 +1211,6 @@ Partial Class F_ImportCdeVente
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
         Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 25)
         '
-        'SelContrat
-        '
-        Me.SelContrat.FillWeight = 15.0!
-        Me.SelContrat.HeaderText = "Sel"
-        Me.SelContrat.Name = "SelContrat"
-        Me.SelContrat.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'NumCdeEDI_Tiers
-        '
-        Me.NumCdeEDI_Tiers.FillWeight = 50.0!
-        Me.NumCdeEDI_Tiers.HeaderText = "Cde EDI"
-        Me.NumCdeEDI_Tiers.Name = "NumCdeEDI_Tiers"
-        Me.NumCdeEDI_Tiers.ReadOnly = True
-        Me.NumCdeEDI_Tiers.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.NumCdeEDI_Tiers.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'NumLigneEDI_Tiers
-        '
-        Me.NumLigneEDI_Tiers.FillWeight = 20.0!
-        Me.NumLigneEDI_Tiers.HeaderText = "Ligne EDI"
-        Me.NumLigneEDI_Tiers.Name = "NumLigneEDI_Tiers"
-        Me.NumLigneEDI_Tiers.ReadOnly = True
-        Me.NumLigneEDI_Tiers.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'ArtCode_Tiers
-        '
-        Me.ArtCode_Tiers.FillWeight = 40.0!
-        Me.ArtCode_Tiers.HeaderText = "Article Tiers"
-        Me.ArtCode_Tiers.Name = "ArtCode_Tiers"
-        Me.ArtCode_Tiers.ReadOnly = True
-        Me.ArtCode_Tiers.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ArtCode_Tiers.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'ArtDesc_Tiers
-        '
-        Me.ArtDesc_Tiers.HeaderText = "Desc."
-        Me.ArtDesc_Tiers.Name = "ArtDesc_Tiers"
-        Me.ArtDesc_Tiers.ReadOnly = True
-        Me.ArtDesc_Tiers.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'DateBesoin
-        '
-        DataGridViewCellStyle2.Format = "d"
-        DataGridViewCellStyle2.NullValue = Nothing
-        Me.DateBesoin.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DateBesoin.FillWeight = 30.0!
-        Me.DateBesoin.HeaderText = "Date Besoin"
-        Me.DateBesoin.Name = "DateBesoin"
-        Me.DateBesoin.ReadOnly = True
-        Me.DateBesoin.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DateBesoin.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'DateCde
-        '
-        DataGridViewCellStyle3.Format = "d"
-        DataGridViewCellStyle3.NullValue = Nothing
-        Me.DateCde.DefaultCellStyle = DataGridViewCellStyle3
-        Me.DateCde.FillWeight = 30.0!
-        Me.DateCde.HeaderText = "Date Cde"
-        Me.DateCde.Name = "DateCde"
-        Me.DateCde.ReadOnly = True
-        Me.DateCde.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'TypeBesoin
-        '
-        Me.TypeBesoin.FillWeight = 15.0!
-        Me.TypeBesoin.HeaderText = "Type Besoin"
-        Me.TypeBesoin.Name = "TypeBesoin"
-        Me.TypeBesoin.ReadOnly = True
-        Me.TypeBesoin.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'TypeCde_ERP
-        '
-        Me.TypeCde_ERP.FillWeight = 15.0!
-        Me.TypeCde_ERP.HeaderText = "Type Cde"
-        Me.TypeCde_ERP.Name = "TypeCde_ERP"
-        Me.TypeCde_ERP.ReadOnly = True
-        Me.TypeCde_ERP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'QteBesoin
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle4.Format = "N2"
-        DataGridViewCellStyle4.NullValue = Nothing
-        Me.QteBesoin.DefaultCellStyle = DataGridViewCellStyle4
-        Me.QteBesoin.FillWeight = 25.0!
-        Me.QteBesoin.HeaderText = "Qté Besoin"
-        Me.QteBesoin.Name = "QteBesoin"
-        Me.QteBesoin.ReadOnly = True
-        Me.QteBesoin.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'QteCde
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle5.Format = "N2"
-        Me.QteCde.DefaultCellStyle = DataGridViewCellStyle5
-        Me.QteCde.FillWeight = 25.0!
-        Me.QteCde.HeaderText = "Qté Cde"
-        Me.QteCde.Name = "QteCde"
-        Me.QteCde.ReadOnly = True
-        Me.QteCde.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'QtePTF
-        '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle6.Format = "N2"
-        Me.QtePTF.DefaultCellStyle = DataGridViewCellStyle6
-        Me.QtePTF.FillWeight = 25.0!
-        Me.QtePTF.HeaderText = "Qté PTF"
-        Me.QtePTF.Name = "QtePTF"
-        Me.QtePTF.ReadOnly = True
-        Me.QtePTF.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'PuEDI
-        '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle7.Format = "N2"
-        DataGridViewCellStyle7.NullValue = Nothing
-        Me.PuEDI.DefaultCellStyle = DataGridViewCellStyle7
-        Me.PuEDI.FillWeight = 20.0!
-        Me.PuEDI.HeaderText = "PxU Tiers"
-        Me.PuEDI.Name = "PuEDI"
-        Me.PuEDI.ReadOnly = True
-        Me.PuEDI.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.PuEDI.Visible = False
-        '
-        'PuCde
-        '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle8.Format = "N2"
-        DataGridViewCellStyle8.NullValue = Nothing
-        Me.PuCde.DefaultCellStyle = DataGridViewCellStyle8
-        Me.PuCde.FillWeight = 20.0!
-        Me.PuCde.HeaderText = "PxU Cde"
-        Me.PuCde.Name = "PuCde"
-        Me.PuCde.ReadOnly = True
-        Me.PuCde.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.PuCde.Visible = False
-        '
-        'ArtCode_ERP
-        '
-        Me.ArtCode_ERP.FillWeight = 40.0!
-        Me.ArtCode_ERP.HeaderText = "Article KEP"
-        Me.ArtCode_ERP.Name = "ArtCode_ERP"
-        Me.ArtCode_ERP.ReadOnly = True
-        Me.ArtCode_ERP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'CodeClient
-        '
-        Me.CodeClient.FillWeight = 30.0!
-        Me.CodeClient.HeaderText = "Client"
-        Me.CodeClient.Name = "CodeClient"
-        Me.CodeClient.ReadOnly = True
-        Me.CodeClient.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'NumCde_ERP
-        '
-        Me.NumCde_ERP.FillWeight = 30.0!
-        Me.NumCde_ERP.HeaderText = "N°Cde"
-        Me.NumCde_ERP.Name = "NumCde_ERP"
-        Me.NumCde_ERP.ReadOnly = True
-        Me.NumCde_ERP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'NumLigneCde_ERP
-        '
-        Me.NumLigneCde_ERP.FillWeight = 20.0!
-        Me.NumLigneCde_ERP.HeaderText = "N° Ligne"
-        Me.NumLigneCde_ERP.Name = "NumLigneCde_ERP"
-        Me.NumLigneCde_ERP.ReadOnly = True
-        Me.NumLigneCde_ERP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'NumLigne_Prop
-        '
-        Me.NumLigne_Prop.FillWeight = 20.0!
-        Me.NumLigne_Prop.HeaderText = "N° Ligne Prop"
-        Me.NumLigne_Prop.Name = "NumLigne_Prop"
-        Me.NumLigne_Prop.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Cumul
-        '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle9.Format = "N2"
-        Me.Cumul.DefaultCellStyle = DataGridViewCellStyle9
-        Me.Cumul.FillWeight = 30.0!
-        Me.Cumul.HeaderText = "Qté Cumul"
-        Me.Cumul.Name = "Cumul"
-        Me.Cumul.ReadOnly = True
-        Me.Cumul.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'PcCumul
-        '
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle10.Format = "N2"
-        Me.PcCumul.DefaultCellStyle = DataGridViewCellStyle10
-        Me.PcCumul.FillWeight = 20.0!
-        Me.PcCumul.HeaderText = "% Cumul"
-        Me.PcCumul.Name = "PcCumul"
-        Me.PcCumul.ReadOnly = True
-        Me.PcCumul.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'MsgLigne
-        '
-        Me.MsgLigne.FillWeight = 20.0!
-        Me.MsgLigne.HeaderText = "Msg Ligne"
-        Me.MsgLigne.Name = "MsgLigne"
-        Me.MsgLigne.ReadOnly = True
-        Me.MsgLigne.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'msgLigneCumul
-        '
-        Me.msgLigneCumul.FillWeight = 20.0!
-        Me.msgLigneCumul.HeaderText = "msgLigneCumul"
-        Me.msgLigneCumul.Name = "msgLigneCumul"
-        Me.msgLigneCumul.ReadOnly = True
-        Me.msgLigneCumul.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.msgLigneCumul.Visible = False
-        '
-        'msgCde
-        '
-        Me.msgCde.FillWeight = 20.0!
-        Me.msgCde.HeaderText = "msgCde"
-        Me.msgCde.Name = "msgCde"
-        Me.msgCde.ReadOnly = True
-        Me.msgCde.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.msgCde.Visible = False
-        '
-        'lId
-        '
-        Me.lId.FillWeight = 20.0!
-        Me.lId.HeaderText = "lId"
-        Me.lId.Name = "lId"
-        Me.lId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.lId.Visible = False
-        '
-        'TypeImport
-        '
-        Me.TypeImport.FillWeight = 30.0!
-        Me.TypeImport.HeaderText = "TypeImport"
-        Me.TypeImport.Name = "TypeImport"
-        Me.TypeImport.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
         'F_ImportCdeVente
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1325,4 +1339,5 @@ Partial Class F_ImportCdeVente
     Friend WithEvents msgCde As DataGridViewTextBoxColumn
     Friend WithEvents lId As DataGridViewTextBoxColumn
     Friend WithEvents TypeImport As DataGridViewTextBoxColumn
+    Friend WithEvents OptionI As CheckBox
 End Class

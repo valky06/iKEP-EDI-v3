@@ -23,10 +23,10 @@ Partial Class F_TiersListe
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.gTiers = New System.Windows.Forms.DataGridView()
-        Me.TiersId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Nom = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TiersPLus = New System.Windows.Forms.Button()
         Me.TiersMoins = New System.Windows.Forms.Button()
+        Me.TiersId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Nom = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.gTiers, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -54,20 +54,6 @@ Partial Class F_TiersListe
         Me.gTiers.Size = New System.Drawing.Size(226, 313)
         Me.gTiers.TabIndex = 3
         '
-        'TiersId
-        '
-        Me.TiersId.FillWeight = 60.0!
-        Me.TiersId.HeaderText = "Id"
-        Me.TiersId.Name = "TiersId"
-        Me.TiersId.ReadOnly = True
-        Me.TiersId.Visible = False
-        '
-        'Nom
-        '
-        Me.Nom.HeaderText = "Nom"
-        Me.Nom.Name = "Nom"
-        Me.Nom.ReadOnly = True
-        '
         'TiersPLus
         '
         Me.TiersPLus.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -87,6 +73,20 @@ Partial Class F_TiersListe
         Me.TiersMoins.TabIndex = 6
         Me.TiersMoins.Text = "-"
         Me.TiersMoins.UseVisualStyleBackColor = True
+        '
+        'TiersId
+        '
+        Me.TiersId.FillWeight = 20.0!
+        Me.TiersId.HeaderText = "Id"
+        Me.TiersId.Name = "TiersId"
+        Me.TiersId.ReadOnly = True
+        Me.TiersId.Visible = False
+        '
+        'Nom
+        '
+        Me.Nom.HeaderText = "Nom"
+        Me.Nom.Name = "Nom"
+        Me.Nom.ReadOnly = True
         '
         'F_TiersListe
         '

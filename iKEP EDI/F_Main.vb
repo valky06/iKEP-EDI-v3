@@ -46,6 +46,7 @@ Public Class F_Main
         Text = My.Application.Info.ProductName
         leUser.Login = My.User.Name
         ParamInit()
+        sContext.Text = ""
     End Sub
 
     Private Sub UtilisateurToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mUtil.Click

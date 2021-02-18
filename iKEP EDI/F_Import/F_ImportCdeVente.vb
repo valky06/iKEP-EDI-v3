@@ -8,6 +8,12 @@ Public Class F_ImportCdeVente
     Dim nbAnocontrat As Integer = 0
     Dim nbAnoCde As Integer = 0
 
+    Sub AfficheContext()
+        If Me.lTiers.SelectedIndex >= 0 Then F_Main.sContext.Text = "Tiers:" & Me.lTiers.SelectedItem.value
+
+        If Me.lSite.SelectedIndex >= 0 Then F_Main.sContext.Text &= " Site:" & Me.lSite.SelectedItem.value
+    End Sub
+
     Sub listesite()
         ComboRempli("select S.SiteId,S.SiteNom from app.UserSite US inner join app.Site S on S.SiteId= US.SiteId where US.UserId=" & leUser.Id _
             & " And S.SiteId in (select distinct SiteId from app.TiersSiteERP where tiersid=" & Me.lTiers.SelectedItem.value & " )", lSite, conSqlEDI)
@@ -87,8 +93,10 @@ Public Class F_ImportCdeVente
 
         If AvecFiltre Then
             If Me.OptionA.Checked Then filtreMsg &= "or MsgLigne Like '%A%'"
-            If Me.tCde_AE.Text <> "" Then filtreMsg &= "or NumCdeEDI_Tiers like '%" & Me.tCde_AE.Text & "%'"
-            If Me.tArt_AE.Text <> "" Then filtreMsg &= "or Article like '%" & Me.tArt_AE.Text & "%'"
+            If Me.OptionI.Checked Then filtreMsg &= "or MsgLigne Like '%I%'"
+
+            '   If Me.tCde_AE.Text <> "" Then filtreMsg &= "or NumCdeEDI_Tiers like '%" & Me.tCde_AE.Text & "%'"
+            '   If Me.tArt_AE.Text <> "" Then filtreMsg &= "or Article like '%" & Me.tArt_AE.Text & "%'"
             If filtreMsg <> "" Then filtreMsg = "And (" & filtreMsg.Remove(0, 3) & ")"
         End If
 
@@ -499,6 +507,7 @@ Public Class F_ImportCdeVente
 
     Sub OptionAnoContratInit(b As Boolean)
         Me.OptionA.Checked = b
+        Me.OptionI.Checked = b
     End Sub
 
     Sub OptionAnoCdeInit(b As Boolean)
@@ -702,6 +711,7 @@ Public Class F_ImportCdeVente
 
         lSite_SelectedIndexChanged(Nothing, Nothing)
 
+        Call AfficheContext()
     End Sub
 
     Private Sub TextBox1_KeyUp(sender As Object, e As KeyEventArgs) Handles tArticle.KeyUp, tCommande.KeyUp
@@ -914,6 +924,7 @@ Public Class F_ImportCdeVente
 
             End If
         End If
+        Call AfficheContext()
     End Sub
 
     Private Sub tCde_AE_KeyUp(sender As Object, e As KeyEventArgs) Handles tCde_AE.KeyUp
@@ -937,6 +948,14 @@ Public Class F_ImportCdeVente
     End Sub
 
     Private Sub tabImport_Click(sender As Object, e As EventArgs) Handles tabImport.Click
+
+    End Sub
+
+    Private Sub F_ImportCdeVente_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        F_Main.sContext.Text = ""
+    End Sub
+
+    Private Sub lSite_Click(sender As Object, e As EventArgs) Handles lSite.Click
 
     End Sub
 End Class
