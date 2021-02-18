@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="SQLConEDI" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Provider=SQLOLEDB.1;Persist Security Info=True;Password=Bgt56yhN;User ID=cssql2017;Server=dmssqlc1.kep.local\app;Database=EDI3;Persist Security Info=True;</Value>
+      <Value Profile="(Default)">Provider=SQLOLEDB.1;Persist Security Info=True;Password=Bgt56yhN;User ID=cssql2017;Server=pmssqlc1.kep.local\app;Database=EDI3;Persist Security Info=True;</Value>
     </Setting>
     <Setting Name="SQLDossierETL" Type="System.String" Scope="User">
       <Value Profile="(Default)">EDI</Value>
@@ -27,7 +27,7 @@
       <Value Profile="(Default)">2050-01-01</Value>
     </Setting>
     <Setting Name="CheminImport" Type="System.String" Scope="User">
-      <Value Profile="(Default)">\\dmssqlc1.kep.local\EDI\Import</Value>
+      <Value Profile="(Default)">\\pmssqlc1.kep.local\EDI\Import</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -15,7 +15,7 @@ Option Explicit On
 Namespace My
     
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.7.0.0"),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.4.0.0"),  _
      Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -57,7 +57,7 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("Provider=SQLOLEDB.1;Persist Security Info=True;Password=Bgt56yhN;User ID=cssql201"& _ 
-            "7;Server=dmssqlc1.kep.local\app;Database=EDI3;Persist Security Info=True;")>  _
+            "7;Server=pmssqlc1.kep.local\app;Database=EDI3;Persist Security Info=True;")>  _
         Public Property SQLConEDI() As String
             Get
                 Return CType(Me("SQLConEDI"),String)
@@ -153,7 +153,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("\\dmssqlc1.kep.local\EDI\Import")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("\\pmssqlc1.kep.local\EDI\Import")>  _
         Public Property CheminImport() As String
             Get
                 Return CType(Me("CheminImport"),String)
