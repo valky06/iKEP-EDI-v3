@@ -30,8 +30,8 @@
     <ProductName>iKEP - EDI</ProductName>
     <PublisherName>iKEP</PublisherName>
     <SuiteName>iKEP - EDI</SuiteName>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>3.0.0.0</ApplicationVersion>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>3.0.1.2</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>

@@ -6,7 +6,7 @@
         Dim leRs As OleDb.OleDbDataReader
         Dim d As Date
         Try
-            sSql = "select top 70 importid, dateimport from app.import where userlogin = '" & leUser.Login & "' and tiersid = 0" & leTiers & " order by importid desc"
+            sSql = "select top 70 importid, dateimport from app.import where tiersid = 0" & leTiers & " order by importid desc"
             Me.cImport.Items.Clear()
             leRs = SqlLit(sSql, conSqlEDI)
             While leRs.Read

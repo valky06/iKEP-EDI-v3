@@ -88,6 +88,9 @@ Public Class F_Main
         fermetout()
         F_Afferme.MdiParent = Me
         F_Afferme.Show()
+
+
+
     End Sub
 
     Private Sub F_Main_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed

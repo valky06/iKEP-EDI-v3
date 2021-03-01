@@ -29,5 +29,8 @@
     <Setting Name="CheminImport" Type="System.String" Scope="User">
       <Value Profile="(Default)">\\pmssqlc1.kep.local\EDI\Import</Value>
     </Setting>
+    <Setting Name="CheminExportTOPS" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\keptopsolidmtb1\IMPORT_EDI_CDE\</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

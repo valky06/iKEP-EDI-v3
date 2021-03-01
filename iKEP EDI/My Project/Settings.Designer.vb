@@ -162,6 +162,18 @@ Namespace My
                 Me("CheminImport") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("\\keptopsolidmtb1\IMPORT_EDI_CDE\")>  _
+        Public Property CheminExportTOPS() As String
+            Get
+                Return CType(Me("CheminExportTOPS"),String)
+            End Get
+            Set
+                Me("CheminExportTOPS") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

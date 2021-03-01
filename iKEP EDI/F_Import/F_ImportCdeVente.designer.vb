@@ -22,6 +22,7 @@ Partial Class F_ImportCdeVente
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -35,12 +36,13 @@ Partial Class F_ImportCdeVente
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(F_ImportCdeVente))
         Me.oFileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.tabImport = New System.Windows.Forms.TabPage()
@@ -71,6 +73,7 @@ Partial Class F_ImportCdeVente
         Me.NumLigneEDI_Tiers = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ArtCode_Tiers = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ArtDesc_Tiers = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AR = New System.Windows.Forms.DataGridViewImageColumn()
         Me.DateBesoin = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateCde = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TypeBesoin = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -104,6 +107,7 @@ Partial Class F_ImportCdeVente
         Me.AnoNumContrat = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.AnoArticle = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.qte = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn28 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.optionToutAnoContrat = New System.Windows.Forms.CheckBox()
         Me.OptionA = New System.Windows.Forms.CheckBox()
@@ -139,6 +143,7 @@ Partial Class F_ImportCdeVente
         Me.bDoc = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
+        Me.iML = New System.Windows.Forms.ImageList(Me.components)
         Me.tabImport.SuspendLayout()
         CType(Me.gImport, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Tableaux.SuspendLayout()
@@ -325,7 +330,7 @@ Partial Class F_ImportCdeVente
         'bControleIntegration
         '
         Me.bControleIntegration.Image = Global.WindowsApplication1.My.Resources.Resources.bControl_fw
-        Me.bControleIntegration.Location = New System.Drawing.Point(1278, 8)
+        Me.bControleIntegration.Location = New System.Drawing.Point(1260, 9)
         Me.bControleIntegration.Name = "bControleIntegration"
         Me.bControleIntegration.Size = New System.Drawing.Size(115, 45)
         Me.bControleIntegration.TabIndex = 12
@@ -390,7 +395,7 @@ Partial Class F_ImportCdeVente
         'bTransfert
         '
         Me.bTransfert.Image = Global.WindowsApplication1.My.Resources.Resources.btransfert_fw
-        Me.bTransfert.Location = New System.Drawing.Point(1145, 8)
+        Me.bTransfert.Location = New System.Drawing.Point(1127, 9)
         Me.bTransfert.Name = "bTransfert"
         Me.bTransfert.Size = New System.Drawing.Size(115, 45)
         Me.bTransfert.TabIndex = 11
@@ -413,6 +418,7 @@ Partial Class F_ImportCdeVente
         '
         Me.gImport.AllowUserToAddRows = False
         Me.gImport.AllowUserToDeleteRows = False
+        Me.gImport.AllowUserToResizeRows = False
         Me.gImport.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -428,7 +434,7 @@ Partial Class F_ImportCdeVente
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.gImport.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.gImport.ColumnHeadersHeight = 38
-        Me.gImport.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SelContrat, Me.NumCdeEDI_Tiers, Me.NumLigneEDI_Tiers, Me.ArtCode_Tiers, Me.ArtDesc_Tiers, Me.DateBesoin, Me.DateCde, Me.TypeBesoin, Me.TypeCde_ERP, Me.QteBesoin, Me.QteCde, Me.QtePTF, Me.PuEDI, Me.PuCde, Me.ArtCode_ERP, Me.CodeClient, Me.NumCde_ERP, Me.NumLigneCde_ERP, Me.NumLigne_Prop, Me.Cumul, Me.PcCumul, Me.MsgLigne, Me.msgLigneCumul, Me.msgCde, Me.lId, Me.TypeImport})
+        Me.gImport.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SelContrat, Me.NumCdeEDI_Tiers, Me.NumLigneEDI_Tiers, Me.ArtCode_Tiers, Me.ArtDesc_Tiers, Me.AR, Me.DateBesoin, Me.DateCde, Me.TypeBesoin, Me.TypeCde_ERP, Me.QteBesoin, Me.QteCde, Me.QtePTF, Me.PuEDI, Me.PuCde, Me.ArtCode_ERP, Me.CodeClient, Me.NumCde_ERP, Me.NumLigneCde_ERP, Me.NumLigne_Prop, Me.Cumul, Me.PcCumul, Me.MsgLigne, Me.msgLigneCumul, Me.msgCde, Me.lId, Me.TypeImport})
         DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
         DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -496,6 +502,14 @@ Partial Class F_ImportCdeVente
         Me.ArtDesc_Tiers.Name = "ArtDesc_Tiers"
         Me.ArtDesc_Tiers.ReadOnly = True
         Me.ArtDesc_Tiers.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'AR
+        '
+        Me.AR.FillWeight = 10.0!
+        Me.AR.HeaderText = ""
+        Me.AR.Name = "AR"
+        Me.AR.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.AR.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'DateBesoin
         '
@@ -711,7 +725,6 @@ Partial Class F_ImportCdeVente
         Me.Tableaux.Size = New System.Drawing.Size(1389, 631)
         Me.Tableaux.TabIndex = 4
         Me.Tableaux.Tag = ""
-        Me.Tableaux.Visible = False
         '
         'tabAnomalies
         '
@@ -731,7 +744,7 @@ Partial Class F_ImportCdeVente
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SplitContainer1.BackColor = System.Drawing.Color.Transparent
         Me.SplitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.SplitContainer1.Location = New System.Drawing.Point(0, 6)
+        Me.SplitContainer1.Location = New System.Drawing.Point(3, 3)
         Me.SplitContainer1.Name = "SplitContainer1"
         '
         'SplitContainer1.Panel1
@@ -758,8 +771,8 @@ Partial Class F_ImportCdeVente
         Me.SplitContainer1.Panel2.Controls.Add(Me.bFiltreAnoERP)
         Me.SplitContainer1.Panel2.Controls.Add(Me.optionToutAnoCde)
         Me.SplitContainer1.Panel2.Controls.Add(Me.optionG)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1403, 593)
-        Me.SplitContainer1.SplitterDistance = 668
+        Me.SplitContainer1.Size = New System.Drawing.Size(1372, 593)
+        Me.SplitContainer1.SplitterDistance = 653
         Me.SplitContainer1.TabIndex = 55
         '
         'OptionI
@@ -769,9 +782,9 @@ Partial Class F_ImportCdeVente
         Me.OptionI.CheckState = System.Windows.Forms.CheckState.Checked
         Me.OptionI.Location = New System.Drawing.Point(191, 27)
         Me.OptionI.Name = "OptionI"
-        Me.OptionI.Size = New System.Drawing.Size(109, 17)
+        Me.OptionI.Size = New System.Drawing.Size(103, 17)
         Me.OptionI.TabIndex = 59
-        Me.OptionI.Text = "I: info Manquante"
+        Me.OptionI.Text = "I: info Incorrecte"
         Me.OptionI.UseVisualStyleBackColor = True
         '
         'Label2
@@ -825,28 +838,28 @@ Partial Class F_ImportCdeVente
         DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.gAnoContrat.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle13
         Me.gAnoContrat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gAnoContrat.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.AnoNumContrat, Me.AnoArticle, Me.DataGridViewTextBoxColumn14, Me.DataGridViewTextBoxColumn28})
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.gAnoContrat.DefaultCellStyle = DataGridViewCellStyle15
+        Me.gAnoContrat.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.AnoNumContrat, Me.AnoArticle, Me.DataGridViewTextBoxColumn14, Me.qte, Me.DataGridViewTextBoxColumn28})
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.gAnoContrat.DefaultCellStyle = DataGridViewCellStyle16
         Me.gAnoContrat.Location = New System.Drawing.Point(5, 49)
         Me.gAnoContrat.Name = "gAnoContrat"
         Me.gAnoContrat.ReadOnly = True
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.gAnoContrat.RowHeadersDefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.gAnoContrat.RowHeadersDefaultCellStyle = DataGridViewCellStyle17
         Me.gAnoContrat.RowHeadersVisible = False
-        Me.gAnoContrat.Size = New System.Drawing.Size(647, 539)
+        Me.gAnoContrat.Size = New System.Drawing.Size(643, 539)
         Me.gAnoContrat.TabIndex = 45
         '
         'AnoNumContrat
@@ -874,6 +887,16 @@ Partial Class F_ImportCdeVente
         Me.DataGridViewTextBoxColumn14.HeaderText = "Desc."
         Me.DataGridViewTextBoxColumn14.Name = "DataGridViewTextBoxColumn14"
         Me.DataGridViewTextBoxColumn14.ReadOnly = True
+        '
+        'qte
+        '
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle15.Format = "N0"
+        Me.qte.DefaultCellStyle = DataGridViewCellStyle15
+        Me.qte.FillWeight = 40.0!
+        Me.qte.HeaderText = "Qté"
+        Me.qte.Name = "qte"
+        Me.qte.ReadOnly = True
         '
         'DataGridViewTextBoxColumn28
         '
@@ -913,7 +936,7 @@ Partial Class F_ImportCdeVente
         'bFiltreAno
         '
         Me.bFiltreAno.Image = Global.WindowsApplication1.My.Resources.Resources.filtre_fw
-        Me.bFiltreAno.Location = New System.Drawing.Point(489, 3)
+        Me.bFiltreAno.Location = New System.Drawing.Point(462, 3)
         Me.bFiltreAno.Name = "bFiltreAno"
         Me.bFiltreAno.Size = New System.Drawing.Size(113, 42)
         Me.bFiltreAno.TabIndex = 39
@@ -987,37 +1010,37 @@ Partial Class F_ImportCdeVente
         Me.gAnoCde.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gAnoCde.BackgroundColor = System.Drawing.SystemColors.Control
         Me.gAnoCde.BorderStyle = System.Windows.Forms.BorderStyle.None
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.gAnoCde.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle17
-        Me.gAnoCde.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gAnoCde.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NumCdeEDI, Me.DataGridViewTextBoxColumn25, Me.DataGridViewTextBoxColumn26, Me.DataGridViewTextBoxColumn27, Me.DataGridViewTextBoxColumn29})
         DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.gAnoCde.DefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.gAnoCde.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle18
+        Me.gAnoCde.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.gAnoCde.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NumCdeEDI, Me.DataGridViewTextBoxColumn25, Me.DataGridViewTextBoxColumn26, Me.DataGridViewTextBoxColumn27, Me.DataGridViewTextBoxColumn29})
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.gAnoCde.DefaultCellStyle = DataGridViewCellStyle19
         Me.gAnoCde.Location = New System.Drawing.Point(3, 49)
         Me.gAnoCde.Name = "gAnoCde"
         Me.gAnoCde.ReadOnly = True
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.gAnoCde.RowHeadersDefaultCellStyle = DataGridViewCellStyle19
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.gAnoCde.RowHeadersDefaultCellStyle = DataGridViewCellStyle20
         Me.gAnoCde.RowHeadersVisible = False
-        Me.gAnoCde.Size = New System.Drawing.Size(723, 539)
+        Me.gAnoCde.Size = New System.Drawing.Size(707, 539)
         Me.gAnoCde.TabIndex = 52
         '
         'NumCdeEDI
@@ -1061,7 +1084,7 @@ Partial Class F_ImportCdeVente
         'bFiltreAnoERP
         '
         Me.bFiltreAnoERP.Image = Global.WindowsApplication1.My.Resources.Resources.filtre_fw
-        Me.bFiltreAnoERP.Location = New System.Drawing.Point(562, 3)
+        Me.bFiltreAnoERP.Location = New System.Drawing.Point(507, 3)
         Me.bFiltreAnoERP.Name = "bFiltreAnoERP"
         Me.bFiltreAnoERP.Size = New System.Drawing.Size(111, 42)
         Me.bFiltreAnoERP.TabIndex = 54
@@ -1211,6 +1234,14 @@ Partial Class F_ImportCdeVente
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
         Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 25)
         '
+        'iML
+        '
+        Me.iML.ImageStream = CType(resources.GetObject("iML.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.iML.TransparentColor = System.Drawing.Color.Transparent
+        Me.iML.Images.SetKeyName(0, "vide.fw.png")
+        Me.iML.Images.SetKeyName(1, "Avance2.png")
+        Me.iML.Images.SetKeyName(2, "recule2.png")
+        '
         'F_ImportCdeVente
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1298,10 +1329,6 @@ Partial Class F_ImportCdeVente
     Friend WithEvents tCde_AC As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents tArt_AC As TextBox
-    Friend WithEvents AnoNumContrat As DataGridViewTextBoxColumn
-    Friend WithEvents AnoArticle As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn14 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn28 As DataGridViewTextBoxColumn
     Friend WithEvents NumCdeEDI As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn25 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn26 As DataGridViewTextBoxColumn
@@ -1313,11 +1340,19 @@ Partial Class F_ImportCdeVente
     Friend WithEvents optionL As CheckBox
     Friend WithEvents Label6 As Label
     Friend WithEvents optionS As CheckBox
+    Friend WithEvents OptionI As CheckBox
+    Friend WithEvents AnoNumContrat As DataGridViewTextBoxColumn
+    Friend WithEvents AnoArticle As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn14 As DataGridViewTextBoxColumn
+    Friend WithEvents qte As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn28 As DataGridViewTextBoxColumn
+    Friend WithEvents iML As ImageList
     Friend WithEvents SelContrat As DataGridViewCheckBoxColumn
     Friend WithEvents NumCdeEDI_Tiers As DataGridViewTextBoxColumn
     Friend WithEvents NumLigneEDI_Tiers As DataGridViewTextBoxColumn
     Friend WithEvents ArtCode_Tiers As DataGridViewTextBoxColumn
     Friend WithEvents ArtDesc_Tiers As DataGridViewTextBoxColumn
+    Friend WithEvents AR As DataGridViewImageColumn
     Friend WithEvents DateBesoin As DataGridViewTextBoxColumn
     Friend WithEvents DateCde As DataGridViewTextBoxColumn
     Friend WithEvents TypeBesoin As DataGridViewTextBoxColumn
@@ -1339,5 +1374,4 @@ Partial Class F_ImportCdeVente
     Friend WithEvents msgCde As DataGridViewTextBoxColumn
     Friend WithEvents lId As DataGridViewTextBoxColumn
     Friend WithEvents TypeImport As DataGridViewTextBoxColumn
-    Friend WithEvents OptionI As CheckBox
 End Class

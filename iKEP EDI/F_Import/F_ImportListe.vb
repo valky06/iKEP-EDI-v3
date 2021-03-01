@@ -51,17 +51,18 @@ Public Class F_ImportListe
         If Me.gFichier.SelectedRows.Count > 0 Then Me.gFichier.Rows.RemoveAt(Me.gFichier.SelectedRows(0).Index)
     End Sub
 
-    Function ImportCdeVente(FichierSource As String, MAZ As String, typeimport As String) As Boolean
+    Function ImportCdeVente(ImportId As Integer, FichierSource As String, MAZ As String, typeimport As String) As Boolean
         Dim importOK As Boolean = False
         Dim lesParam As New List(Of SSISParam)
         Try
             StatutBar("Recherche Traitement Tiers...")
             lesParam.Clear()
             lesParam.Add(New SSISParam("FichierSource", leUser.RepImport & FichierSource, "PACKAGE"))
-            lesParam.Add(New SSISParam("TiersId", Me.leTiersId.ToString, "PACKAGE"))
-            lesParam.Add(New SSISParam("UserLogin", leUser.Login, "PACKAGE"))
+            lesParam.Add(New SSISParam("TiersId", Me.leTiersId, "PACKAGE"))
+            '            lesParam.Add(New SSISParam("UserLogin", leUser.Login, "PACKAGE"))
             lesParam.Add(New SSISParam("MAZ", MAZ, "PACKAGE"))
             lesParam.Add(New SSISParam("TypeImport", typeimport, "PACKAGE"))
+            lesParam.Add(New SSISParam("ImportId", lImportId, "PACKAGE"))
             If SSISexecute(leUser.RepSSIS, "DM_IN_CDV_Import.dtsx", lesParam, "Importation des données") Then importOK = True
             StatutBar("")
 
@@ -136,8 +137,12 @@ Public Class F_ImportListe
                     StatutBar("Mise en forme Fichier Excel")
                     'prépare la feuille Excel contenant les données retravaillées
                     '1er et 2 ligne  du tableau
+                    Try
+                        XLApp.Sheets("EDIKEP").delete
+                    Catch ex As Exception
+
+                    End Try
                     XLSheetKEP = XLApp.Worksheets.Add()
-                    '''''''''''XLApp.Visible = True
                     XLSheetKEP.Name = "EDIKEP"
                     XLSheetData.Activate()
 
@@ -146,7 +151,7 @@ Public Class F_ImportListe
                         If leParam.Split("|")(j).Split(";")(1) <> "" Then
                             If leParam.Split("|")(j).Split(";")(1).Contains("Col") Then
 
-                                XLSheetKEP.Cells(2, j).formulaR1C1 = "='" & lafeuille & "'!R[" & (laligne - 1).ToString & "]C" & leParam.Split("|")(j).Split(";")(1).Replace("Col", "")
+                                XLSheetKEP.Cells(2, j).formulaR1C1 = "='" & Txt2sql(lafeuille) & "'!R[" & (laligne - 1).ToString & "]C" & leParam.Split("|")(j).Split(";")(1).Replace("Col", "")
 
                             Else
 
@@ -158,7 +163,7 @@ Public Class F_ImportListe
                                 XLSheetData.Range(XLSheetData.Cells(laligne + 2, laDerCol), XLSheetData.Cells(XLSheetData.UsedRange.Rows.Count, laDerCol)).Select()
                                 XLSheetData.Paste()
 
-                                XLSheetKEP.Cells(2, j).formular1c1 = "='" & lafeuille & "'!R[" & (laligne - 1).ToString & "]C" & laDerCol
+                                XLSheetKEP.Cells(2, j).formular1c1 = "='" & Txt2sql(lafeuille) & "'!R[" & (laligne - 1).ToString & "]C" & laDerCol
 
                                 '                                XLSheetKEP.Cells(2, j).formula = leParam.Split("|")(j).Split(";")(1)
                             End If
@@ -178,13 +183,13 @@ Public Class F_ImportListe
                     Next
 
                     AttenteFin()
-
+                    ' XLApp.ActiveWorkbook.SaveAs(leUser.RepImport & leNomSourceServer & "_" & Now.ToString("ddMMyyhhMM") & ".xlsx")
                     StatutBar("Transfert Fichier CSV sur serveur")
                     XLSheetKEP.SaveAs(leUser.RepImport & leNomSourceServer & ".csv", XlFileFormat.xlCSV,,,, False)
                     XLApp.ActiveWorkbook.Close(False)
 
                     StatutBar("Importaton des données")
-                    Call ImportCdeVente(leNomSourceServer & ".csv", IIf(i = 0, "O", "N"), Me.gFichier.Rows(i).Cells("TypeTrait").Value)
+                    Call ImportCdeVente(lImportId, leNomSourceServer & ".csv", IIf(i = 0, "O", "N"), Me.gFichier.Rows(i).Cells("TypeTrait").Value)
 
                 Next i
 

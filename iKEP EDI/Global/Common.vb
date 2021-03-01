@@ -14,7 +14,7 @@ Public Module Common
     Public leUser As New User
     Public Modedebug As Boolean = True
     Public coulAvance As Color = Color.FromArgb(255, 200, 140)
-    Public coulRecule As Color = Color.FromArgb(255, 200, 140)
+    Public coulRecule As Color = Color.FromArgb(240, 185, 255)
     Public coulDateModif As Color = Color.FromArgb(240, 185, 255)
     Public coulModif As Color = Color.FromArgb(160, 210, 255)
     Public coulSuppr As Color = Color.FromArgb(240, 150, 150)

@@ -68,7 +68,7 @@ Public Class F_ImportCdeVente
 
     Sub InitBilan()
 
-        Me.Tableaux.Visible = False
+        'Me.Tableaux.Visible = False
         Me.gImport.Visible = False
         Me.gImport.Rows.Clear()
         Me.gAnoCde.Visible = False
@@ -100,7 +100,7 @@ Public Class F_ImportCdeVente
             If filtreMsg <> "" Then filtreMsg = "And (" & filtreMsg.Remove(0, 3) & ")"
         End If
 
-        sSql = "SELECT   NumCdeEDI_Tiers,  Article,  ArtDesc_Tiers,  MsgLigne FROM  CommandeVente_Anomalie" _
+        sSql = "SELECT   NumCdeEDI_Tiers,  Article,  ArtDesc_Tiers,  MsgLigne, qtebesoin FROM  CommandeVente_Anomalie" _
         & " WHERE NumCdeEDI_Tiers <> '' and ImportId=" & lImportId & " and siteid=" & Me.lSite.SelectedItem.value _
         & filtreMsg
 
@@ -112,7 +112,7 @@ Public Class F_ImportCdeVente
 
         lers = SqlLit(sSql, conSqlEDI)
         While lers.Read
-            Me.gAnoContrat.Rows.Add(lers("NumCdeEDI_Tiers"), Nz(lers("Article"), ""), Nz(lers("ArtDesc_Tiers"), ""), Nz(lers("msgLigne"), ""))
+            Me.gAnoContrat.Rows.Add(lers("NumCdeEDI_Tiers"), Nz(lers("Article"), ""), Nz(lers("ArtDesc_Tiers"), ""), lers("QTeBesoin"), Nz(lers("msgLigne"), ""))
             nbligne += 1
         End While
         lers.Close()
@@ -233,9 +233,6 @@ Public Class F_ImportCdeVente
         sSql &= " and NumCdeEDI_Tiers not in (   select distinct NumCdeEDI from CommandeVente_Transfert where ImportId = " & lImportId & " and statutaffiche=1)"
         sSql &= "order by NumCdeEDI_Tiers, article, NumLigneEDI_Tiers, dateLigne"
 
-
-
-
         lers = SqlLit(sSql, conSqlEDI)
         While lers.Read
             StatutBar("Commande EDI :" & i)
@@ -246,7 +243,7 @@ Public Class F_ImportCdeVente
                 precVal = Nz(lers("NumCdeEDI_Tiers"), "")
                 If cumulCde = 0 Then ecart = 0 Else ecart = Math.Round(((cumulBesoin / cumulCde - 1)), 2)
                 If gImport.RowCount > 0 Then
-                    gImport.Rows.Add(False, "", "", "", "", "", "", "", "", cumulBesoin, cumulCde, IIf(ecart = 0, "", ecart.ToString("0%")),
+                    gImport.Rows.Add(False, "", "", "", "", Me.iML.Images(0), "", "", "", "", cumulBesoin, cumulCde, IIf(ecart = 0, "", ecart.ToString("0%")),
                                       "", "", "", "", "", "", "", "", "", msgCde)
                     gImport.Rows(gImport.RowCount - 1).DefaultCellStyle.BackColor = Color.LightGray
                     gImport.Rows(gImport.RowCount - 1).ReadOnly = True
@@ -269,7 +266,7 @@ Public Class F_ImportCdeVente
 
             If cumulCde > 0 Then CumulBesoinPC = Math.Round((cumulBesoin / cumulCde - 1) * 100, 0)
 
-            gImport.Rows.Add(False, lers("NumCdeEDI_Tiers"), lers("NumLigneEDI_Tiers"), lers("Article"), lers("ArtDesc_tiers"),
+            gImport.Rows.Add(False, lers("NumCdeEDI_Tiers"), lers("NumLigneEDI_Tiers"), lers("Article"), lers("ArtDesc_tiers"), Me.iML.Images(0),
                              Date2Grid(lers("DateBesoin")), Date2Grid(lers("Date_ERP")),
                              lers("TypeBesoin_Tiers"), lers("TypeCde_ERP"),
                              lers("QteBesoin"), lers("QteCde"), lers("qtePTF"),
@@ -282,19 +279,17 @@ Public Class F_ImportCdeVente
 
                 If Nz(.Cells("QteCde").Value, 0) <> Nz(.Cells("QteBesoin").Value, 0) Then .Cells("cumul").Style.BackColor = coulModif
 
-                If Nz(.Cells("msgLigne").Value, 0).ToString.Contains("B") Then
-                    .Cells("DateBesoin").Style.BackColor = coulAvance
-                    .Cells("DateCde").Style.BackColor = coulAvance
-                End If
-
-                If Nz(.Cells("msgLigne").Value, 0).ToString.Contains("C") Then
-                    .Cells("DateBesoin").Style.BackColor = coulRecule
-                    .Cells("DateCde").Style.BackColor = coulRecule
-                End If
-
-                If Nz(.Cells("msgLigne").Value, 0).ToString.Contains("D") Then
-                    .Cells("DateBesoin").Style.BackColor = coulDateModif
-                    .Cells("DateCde").Style.BackColor = coulDateModif
+                If .Cells("DateBesoin").Value <> "" And .Cells("DateCde").Value <> "" Then
+                    If CDate(.Cells("DateBesoin").Value) < CDate(.Cells("DateCde").Value) Then
+                        .Cells("DateBesoin").Style.BackColor = coulAvance
+                        .Cells("DateCde").Style.BackColor = coulAvance
+                        .Cells("AR").Value = Me.iML.Images(1)
+                    End If
+                    If CDate(.Cells("DateBesoin").Value) > CDate(.Cells("DateCde").Value) Then
+                        .Cells("DateBesoin").Style.BackColor = coulRecule
+                        .Cells("DateCde").Style.BackColor = coulRecule
+                        .Cells("AR").Value = Me.iML.Images(2)
+                    End If
                 End If
 
                 If .Cells("msgLigne").Value.Contains("F") Then
@@ -343,7 +338,7 @@ Public Class F_ImportCdeVente
 
         'Dernière Ligne de total
         If cumulCde = 0 Then ecart = 0 Else ecart = Math.Round(((cumulBesoin / cumulCde - 1)), 2)
-        gImport.Rows.Add(False, "", "", "", "", "", "", "", "", cumulBesoin, cumulCde, IIf(ecart = 0, "", ecart.ToString("0%")), "", "", "", "", "", "", "", "", "", msgCde)
+        gImport.Rows.Add(False, "", "", "", "", Me.iML.Images(0), "", "", "", "", cumulBesoin, cumulCde, IIf(ecart = 0, "", ecart.ToString("0%")), "", "", "", "", "", "", "", "", "", msgCde)
         gImport.Rows(gImport.RowCount - 1).DefaultCellStyle.BackColor = Color.LightGray
         gImport.Rows(gImport.RowCount - 1).ReadOnly = True
 
@@ -371,7 +366,7 @@ Public Class F_ImportCdeVente
                 lesParam.Clear()
 
                 lesParam.Add(New SSISParam("ImportId", lImportId, "PACKAGE"))
-                lesParam.Add(New SSISParam("TiersId", lTiers.SelectedItem.Value, "PACKAGE"))
+                'lesParam.Add(New SSISParam("TiersId", lTiers.SelectedItem.Value, "PACKAGE"))
                 lesParam.Add(New SSISParam("UserLogin", leUser.Login, "PACKAGE"))
                 lesParam.Add(New SSISParam("SiteId", lSite.SelectedItem.value, "PACKAGE"))
 
@@ -387,11 +382,7 @@ Public Class F_ImportCdeVente
     End Function
 
     Function ImportNouveau() As Integer
-
         Dim idNew = SqlDo("INSERT INTO app.Import (IdUser, DateImport, TiersId) VALUES ('" & leUser.Id & "', '" & Now() & "', 0" & lTiers.SelectedItem.value & ")", conSqlEDI, True)
-
-        '        SqlDo("INSERT INTO app.ImportFichier (ImportId, FichierSource, FichierDest) VALUES (" & idNew & " ,'" & fSource & "','" & fDest & "')", conSqlEDI)
-
         Return idNew
     End Function
 
@@ -427,10 +418,10 @@ Public Class F_ImportCdeVente
     Sub ImportBilan()
         Dim Nblignes As Integer = 0
 
-        lImportId = ImportDernier()
+        '        lImportId = ImportDernier()
 
         Try
-            Dim leRs = SqlLit("SELECT COUNT(*) AS Nb FROM CommandeVente_EDI WHERE UserLogin = '" & leUser.Login & "' AND TiersId = 0" & Me.lTiers.SelectedItem.Value, conSqlEDI)
+            Dim leRs = SqlLit("SELECT COUNT(*) AS Nb FROM CommandeVente_EDI WHERE Importid = " & Me.lImportId, conSqlEDI)
             While leRs.Read
                 Nblignes = leRs(0)
             End While
@@ -440,8 +431,7 @@ Public Class F_ImportCdeVente
                 F_Main.Focus()
                 If MessageBox.Show(Nblignes & " lignes importées. Continuer ?", "Importation", MessageBoxButtons.OKCancel) = Windows.Forms.DialogResult.OK Then
 
-                    lImportId = ImportNouveau()
-                    Call ImportAfficheNum(lImportId, Now)
+                    Call ImportAfficheNum(Me.lImportId, Now)
                     StatutBar("Exécution Bilan")
                     If ExecuteBilan() Then
                         F_Main.Focus()
@@ -464,7 +454,7 @@ Public Class F_ImportCdeVente
 
     Private Sub Import(sender As System.Object, e As System.EventArgs) Handles bImporter.Click
         Dim lesParam As New List(Of SSISParam)
-        Dim CliIntra As Boolean = False
+        Dim LoadFile As Boolean = False
         Dim sSql As String
         Dim leRs As OleDb.OleDbDataReader
         Dim bImp As Boolean = False
@@ -474,16 +464,19 @@ Public Class F_ImportCdeVente
         Try
             StatutBar("Recherche Traitement Tiers...")
 
+            lImportId = ImportNouveau()
+
+
             'Vérif chargement par fichier ou directement par base ERP
             sSql = "SELECT TiersLoadFile FROM app.Tiers WHERE TiersId = " & Me.lTiers.SelectedItem.Value
             leRs = SqlLit(sSql, conSqlEDI)
             If leRs.HasRows Then
                 leRs.Read()
-                CliIntra = leRs(0)
+                LoadFile = leRs(0)
             End If
             leRs.Close()
 
-            If Not CliIntra Then
+            If Not LoadFile Then
                 StatutBar("Import Données InterCo...")
                 lesParam.Add(New SSISParam("TiersId", Me.lTiers.SelectedItem.Value, "PACKAGE"))
                 lesParam.Add(New SSISParam("UserLogin", leUser.Login, "PACKAGE"))
@@ -491,6 +484,7 @@ Public Class F_ImportCdeVente
             Else
                 StatutBar("Import Données Fichiers...")
                 F_ImportListe.leTiersId = Me.lTiers.SelectedItem.Value
+                F_ImportListe.lImportId = Me.lImportId
                 If F_ImportListe.ShowDialog() = DialogResult.OK Then bImp = True
                 F_ImportListe.Dispose()
             End If
@@ -796,11 +790,19 @@ Public Class F_ImportCdeVente
 
                     SqlDo(sSql, conSqlEDI)
 
+                    Dim leFichier As String = "EDI_CDE_" & Now.ToString("ddMMyy_HHmm") & ".txt"
+
+                    My.Settings.Reload()
                     lesParam.Clear()
                     lesParam.Add(New SSISParam("ImportId", lImportId, "PACKAGE"))
-                    lesParam.Add(New SSISParam("TiersId", lTiers.SelectedItem.value, "PACKAGE"))
+                    lesParam.Add(New SSISParam("SiteId", Me.lSite.SelectedItem.value, "PACKAGE"))
+                    '                    lesParam.Add(New SSISParam("TiersId", lTiers.SelectedItem.value, "PACKAGE"))
                     lesParam.Add(New SSISParam("UserLogin", leUser.Login, "PACKAGE"))
+                    lesParam.Add(New SSISParam("LeFichier", "\\pmssqlc1\EDI\Export\" & leFichier, "PACKAGE"))
+
                     SSISexecute(leUser.RepSSIS, "DM_IN_CDV_Integre.dtsx", lesParam, "Ecriture des données -> ERP")
+
+                    FileCopy("\\pmssqlc1\EDI\Export\" & leFichier, My.Settings.CheminExportTOPS & leFichier)
 
                 Catch ex As Exception
                     MsgBox(ex.Message)
@@ -845,48 +847,21 @@ Public Class F_ImportCdeVente
         OptionContratInit(optionToutContrat.Checked)
     End Sub
 
-    Private Sub ControleIntegration(sender As Object, e As EventArgs) Handles bControleIntegration.Click
-        ''Try
-        ''    If Not TransfertEncours() Then
-        ''        Dim lesParam As New List(Of SSISParam)
-        ''        lesParam.Clear()
-        ''        lesParam.Add(New SSISParam("ImportId", lImportId.ToString, "PACKAGE"))
-        ''        lesParam.Add(New SSISParam("BaseSilog", leUser.Base, "PROJET"))
-        ''        lesParam.Add(New SSISParam("ServSilog", leUser.ServeurERP, "PROJET"))
-        ''        lesParam.Add(New SSISParam("UserLogin", leUser.Login, "PACKAGE"))
-        ''        SSISexecute(leUser.RepSSIS, "DM_IN_CDV_IntegreControl.dtsx", lesParam, "Contrôle Intégration")
-
-        ''        F_Main.Focus()
-        ''        F_ImportControlIntegration.limport = lImportId
-        ''        F_ImportControlIntegration.ShowDialog()
-        ''    Else
-        ''        MsgBox("Transfert en cours, Contrôle impossible !")
-        ''    End If
-        ''Catch ex As Exception
-        ''End Try
-    End Sub
 
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles bEncours.Click
-        Dim impE As F_ImportEncours = New F_ImportEncours
-        impE.ShowDialog()
-        impE.Dispose()
-    End Sub
+    'Private Sub LinkLabel1_LinkClicked_2(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles bEncours.Click
+    '    Dim impE As F_ImportEncours = New F_ImportEncours
+    '    impE.ShowDialog()
+    '    impE.Dispose()
+    'End Sub
 
+    'Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles bArchives.Click
 
-    Private Sub LinkLabel1_LinkClicked_2(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles bEncours.Click
-        Dim impE As F_ImportEncours = New F_ImportEncours
-        impE.ShowDialog()
-        impE.Dispose()
-    End Sub
-
-    Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles bArchives.Click
-
-        If lTiers.SelectedIndex < 0 Then Exit Sub
-        F_ImportArchive.leTiers = lTiers.SelectedItem.value
-        F_ImportArchive.ShowDialog()
-        F_ImportArchive.Dispose()
-    End Sub
+    '    If lTiers.SelectedIndex < 0 Then Exit Sub
+    '    F_ImportArchive.leTiers = lTiers.SelectedItem.value
+    '    F_ImportArchive.ShowDialog()
+    '    F_ImportArchive.Dispose()
+    'End Sub
 
     Private Sub ToolStripLabel1_Click(sender As Object, e As EventArgs)
         Me.Dispose()
@@ -943,19 +918,14 @@ Public Class F_ImportCdeVente
         If e.KeyCode = Keys.Enter Then ListeAnomalieCde(True)
     End Sub
 
-    Private Sub ToolStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ToolStrip1.ItemClicked
-
-    End Sub
-
-    Private Sub tabImport_Click(sender As Object, e As EventArgs) Handles tabImport.Click
-
-    End Sub
-
     Private Sub F_ImportCdeVente_Closed(sender As Object, e As EventArgs) Handles Me.Closed
         F_Main.sContext.Text = ""
     End Sub
 
-    Private Sub lSite_Click(sender As Object, e As EventArgs) Handles lSite.Click
-
+    Private Sub bArchives_Click(sender As Object, e As EventArgs) Handles bArchives.Click
+        If Me.lTiers.SelectedIndex < 0 Then Exit Sub
+        F_ImportArchive.leTiers = Me.lTiers.SelectedItem.value
+        F_ImportArchive.ShowDialog()
+        F_ImportArchive.Dispose()
     End Sub
 End Class

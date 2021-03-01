@@ -26,6 +26,7 @@ Partial Class F_Main
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(F_Main))
         Me.sStatus = New System.Windows.Forms.StatusStrip()
         Me.sLabel = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.sContext = New System.Windows.Forms.ToolStripStatusLabel()
         Me.sUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tVersion = New System.Windows.Forms.ToolStripStatusLabel()
         Me.mGlobal = New System.Windows.Forms.MenuStrip()
@@ -40,7 +41,6 @@ Partial Class F_Main
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.mParam = New System.Windows.Forms.ToolStripMenuItem()
         Me.AideEnLigneToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.sContext = New System.Windows.Forms.ToolStripStatusLabel()
         Me.sStatus.SuspendLayout()
         Me.mGlobal.SuspendLayout()
         Me.SuspendLayout()
@@ -61,6 +61,12 @@ Partial Class F_Main
         Me.sLabel.Spring = True
         Me.sLabel.Text = "Etat"
         Me.sLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft
+        '
+        'sContext
+        '
+        Me.sContext.Name = "sContext"
+        Me.sContext.Size = New System.Drawing.Size(49, 17)
+        Me.sContext.Text = "Context"
         '
         'sUser
         '
@@ -154,12 +160,6 @@ Partial Class F_Main
         Me.AideEnLigneToolStripMenuItem.Name = "AideEnLigneToolStripMenuItem"
         Me.AideEnLigneToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.AideEnLigneToolStripMenuItem.Text = "Aide en ligne"
-        '
-        'sContext
-        '
-        Me.sContext.Name = "sContext"
-        Me.sContext.Size = New System.Drawing.Size(49, 17)
-        Me.sContext.Text = "Context"
         '
         'F_Main
         '

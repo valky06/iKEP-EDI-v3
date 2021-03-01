@@ -80,7 +80,7 @@ Public Class F_ImportParam
         Dim Obligatoire As Boolean = True
 
         If Me.gTypeCSV.Visible Then LeParam = "CSV;" & Me.cDelimiter.Text
-        If Me.gTypeXLS.Visible Then LeParam = "XL;" & Me.tNumLigneEntete.Text & ";" & Me.cSheet.Text
+        If Me.gTypeXLS.Visible Then LeParam = "XL;" & Me.tNumLigneEntete.Text & ";" & Txt2sql(Me.cSheet.Text)
 
         For Each cmp As System.Windows.Forms.Control In Me.oMapping.Controls
             If TypeOf (cmp) Is System.Windows.Forms.TextBox Then
@@ -144,11 +144,10 @@ Public Class F_ImportParam
                         If xlWorkSheet.Cells(Val(Me.tNumLigneEntete.Text) + 1, x).value Is Nothing Then
                             lesColValeur.Add(x, "Col" & x)
                         Else
-                            If xlWorkSheet.Cells(Val(Me.tNumLigneEntete.Text) + 1, x).formula = xlWorkSheet.Cells(Val(Me.tNumLigneEntete.Text) + 1, x).value.ToString _
-                                Or xlWorkSheet.Cells(Val(Me.tNumLigneEntete.Text) + 1, x).value.GetType.ToString.Contains("Date") Then
-                                lesColValeur.Add(x, "Col" & x)
-                            Else
+                            If (xlWorkSheet.Cells(Val(Me.tNumLigneEntete.Text) + 1, x).formula.ToString + " ").Substring(0, 1) = "=" Then '  = xlWorkSheet.Cells(Val(Me.tNumLigneEntete.Text) + 1, x).value.ToString Then '                                 Or xlWorkSheet.Cells(Val(Me.tNumLigneEntete.Text) + 1, x).value.GetType.ToString.Contains("Date") Then
                                 lesColValeur.Add(x, xlWorkSheet.Cells(Val(Me.tNumLigneEntete.Text) + 1, x).formula)
+                            Else
+                                lesColValeur.Add(x, "Col" & x)
                             End If
 
                         End If
