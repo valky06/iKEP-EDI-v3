@@ -285,7 +285,7 @@ Public Module Common
             lareq.CommandType = CommandType.Text
             Return lareq.ExecuteReader()
         Catch ex As Exception
-            If Modedebug Then MsgBox(ex.Message & s)
+            MsgBox(ex.Message & s)
             'Throw New Exception(ex.Message) 'TODO: vérifier la gestion de l'erreur
             Return Nothing
         End Try

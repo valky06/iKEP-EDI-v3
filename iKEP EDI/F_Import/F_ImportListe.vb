@@ -1,12 +1,33 @@
-﻿Imports System.IO
-Imports Microsoft.Office.Interop.Excel
+﻿Imports Microsoft.Office.Interop.Excel
+Imports System.Data
+
 
 Public Class F_ImportListe
 
     Public leTiersId As Integer
-    Public lImportId As Integer = 0
+    Public lImportId2 As Integer = 0
 
     Private Sub F_ImportListe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim leRs As OleDb.OleDbDataReader
+
+        'Site
+        Dim dcSite As System.Data.DataTable = New System.Data.DataTable
+        dcSite.Columns.Add("TypeTraitNom", GetType(String))
+
+        Dim laCbx As DataGridViewComboBoxColumn = New DataGridViewComboBoxColumn
+        laCbx = gFichier.Columns(2)
+        laCbx.Items.Clear()
+
+
+        leRs = SqlLit("SELECT TypeTraitid, TypeTraitNom FROM app.TiersTypeTraitement where tiersid=" & Me.leTiersId & " order by ordre", conSqlEDI)
+        While leRs.Read()
+            laCbx.Items.Add(leRs("TypeTraitNom"))
+        End While
+        leRs.Close()
+
+        gFichier.Columns.Remove("TypeTraitNom")
+        gFichier.Columns.Insert(2, laCbx)
+
         Call TiersPLus_Click(Nothing, Nothing)
     End Sub
 
@@ -15,7 +36,7 @@ Public Class F_ImportListe
         Dim LaReq As String
 
         LaReq = "SELECT TiersTraitId, LesParam  FROM app.TiersTraitement where LesParam<>'' and TypeTraitement='" _
-            & Me.gFichier.Rows(laLigne).Cells("TypeTrait").Value & "' and TiersId=" & leTiersId _
+            & Me.gFichier.Rows(laLigne).Cells("TypeTraitNom").Value & "' and TiersId=" & leTiersId _
             & " and extension='" & Me.gFichier.Rows(laLigne).Cells("Extension").Value & "'"
         LeRs = SqlLit(LaReq, conSqlEDI)
 
@@ -41,10 +62,11 @@ Public Class F_ImportListe
 
         If oFileDialog.ShowDialog = System.Windows.Forms.DialogResult.OK Then
             Me.gFichier.Rows.Add(oFileDialog.FileName, FileExtension(oFileDialog.FileName))
-            c = Me.gFichier.Rows(Me.gFichier.RowCount - 1).Cells("TypeTrait")
-            Me.gFichier.Rows(Me.gFichier.RowCount - 1).Cells("TypeTrait").Value = c.Items(0)
-            Call verifTraitement(Me.gFichier.RowCount - 1)
-        End If
+            Dim laCbx As DataGridViewComboBoxColumn = New DataGridViewComboBoxColumn
+            laCbx = Me.gFichier.Columns(2)
+            If laCbx.Items.Count > 1 Then Me.gFichier.Rows(Me.gFichier.RowCount - 1).Cells("TypeTraitNom").Value = laCbx.Items(0)
+            Call VerifTraitement(Me.gFichier.RowCount - 1)
+            End If
     End Sub
 
     Private Sub TiersMoins_Click(sender As Object, e As EventArgs) Handles TiersMoins.Click
@@ -62,7 +84,7 @@ Public Class F_ImportListe
             '            lesParam.Add(New SSISParam("UserLogin", leUser.Login, "PACKAGE"))
             lesParam.Add(New SSISParam("MAZ", MAZ, "PACKAGE"))
             lesParam.Add(New SSISParam("TypeImport", typeimport, "PACKAGE"))
-            lesParam.Add(New SSISParam("ImportId", lImportId, "PACKAGE"))
+            lesParam.Add(New SSISParam("ImportId", lImportId2, "PACKAGE"))
             If SSISexecute(leUser.RepSSIS, "DM_IN_CDV_Import.dtsx", lesParam, "Importation des données") Then importOK = True
             StatutBar("")
 
@@ -73,6 +95,11 @@ Public Class F_ImportListe
         End Try
         Return importOK
 
+    End Function
+
+    Function ImportNouveau() As Integer
+        Dim idNew = SqlDo("INSERT INTO app.Import (IdUser, DateImport, TiersId) VALUES ('" & leUser.Id & "', '" & Now() & "', 0" & leTiersId & ")", conSqlEDI, True)
+        Return idNew
     End Function
 
 
@@ -89,7 +116,7 @@ Public Class F_ImportListe
         Dim laDerCol As Integer = 0
 
         For i = 0 To Me.gFichier.RowCount - 1
-            If Nz(Me.gFichier.Rows(i).Cells("TypeTrait").Value, "") = "" _
+            If Nz(Me.gFichier.Rows(i).Cells("TypeTraitNom").Value, "") = "" _
                 Or Nz(Me.gFichier.Rows(i).Cells("Param").Value, "") = "" Then
                 TraitErr = True
             End If
@@ -99,11 +126,11 @@ Public Class F_ImportListe
             MsgBox("Certains fichier à importer n'ont pas de type", MsgBoxStyle.OkOnly Or MsgBoxStyle.Critical)
         Else
             Try
-                SqlDo("Delete from commandeVente_EDI where tiersid=" & Me.leTiersId & " And userlogin='" & leUser.Login & "'", conSqlEDI)
                 ' TraitErr = False
                 Dim XLApp As New Application()
                 'XLApp.ScreenUpdating = False
 
+                Me.lImportId2 = ImportNouveau()
                 For i = 0 To Me.gFichier.RowCount - 1
                     Me.gFichier.Rows(i).Cells(0).Style.BackColor = Color.FromArgb(255, 100, 100)
 
@@ -150,21 +177,15 @@ Public Class F_ImportListe
                         XLSheetKEP.Cells(1, j).value = leParam.Split("|")(j).Split(";")(0)
                         If leParam.Split("|")(j).Split(";")(1) <> "" Then
                             If leParam.Split("|")(j).Split(";")(1).Contains("Col") Then
-
                                 XLSheetKEP.Cells(2, j).formulaR1C1 = "='" & Txt2sql(lafeuille) & "'!R[" & (laligne - 1).ToString & "]C" & leParam.Split("|")(j).Split(";")(1).Replace("Col", "")
-
                             Else
-
                                 laDerCol += 1
-
                                 XLSheetData.Cells(laligne + 1, laDerCol).formula = leParam.Split("|")(j).Split(";")(1)
                                 XLSheetData.Cells(laligne + 1, laDerCol).Copy()
                                 'XLSheetData.Range(XLSheetData.Cells(3, 50), XLSheetData.Cells(25, 50)).Select()
                                 XLSheetData.Range(XLSheetData.Cells(laligne + 2, laDerCol), XLSheetData.Cells(XLSheetData.UsedRange.Rows.Count, laDerCol)).Select()
                                 XLSheetData.Paste()
-
                                 XLSheetKEP.Cells(2, j).formular1c1 = "='" & Txt2sql(lafeuille) & "'!R[" & (laligne - 1).ToString & "]C" & laDerCol
-
                                 '                                XLSheetKEP.Cells(2, j).formula = leParam.Split("|")(j).Split(";")(1)
                             End If
                         End If
@@ -189,7 +210,7 @@ Public Class F_ImportListe
                     XLApp.ActiveWorkbook.Close(False)
 
                     StatutBar("Importaton des données")
-                    Call ImportCdeVente(lImportId, leNomSourceServer & ".csv", IIf(i = 0, "O", "N"), Me.gFichier.Rows(i).Cells("TypeTrait").Value)
+                    Call ImportCdeVente(lImportId2, leNomSourceServer & ".csv", IIf(i = 0, "O", "N"), Me.gFichier.Rows(i).Cells("TypeTraitNom").Value)
 
                 Next i
 
@@ -212,26 +233,31 @@ Public Class F_ImportListe
 
     Private Sub BAnnul_Click(sender As Object, e As EventArgs) Handles bAnnul.Click
         Me.DialogResult = DialogResult.Cancel
+        Me.lImportId2 = 0
         Me.Dispose()
     End Sub
 
     Private Sub GFichier_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles gFichier.CellContentClick
         If e.ColumnIndex = Me.gFichier.Columns("ParamImg").Index Then
+            If Me.gFichier.Rows(e.RowIndex).Cells("TypeTraitNom").Value <> "" Then
 
-            F_ImportParam.LeFichier = Me.gFichier.Rows(e.RowIndex).Cells("FicLocal").Value
-            F_ImportParam.Lextension = Me.gFichier.Rows(e.RowIndex).Cells("Extension").Value
-            F_ImportParam.LeTraitId = Me.gFichier.Rows(e.RowIndex).Cells("ParamId").Value
-            F_ImportParam.LeTiersId = Me.leTiersId
-            F_ImportParam.LeTypeTrait = Me.gFichier.Rows(e.RowIndex).Cells("TypeTrait").Value
-            F_ImportParam.LeParam = Me.gFichier.Rows(e.RowIndex).Cells("Param").Value
-            If F_ImportParam.ShowDialog() = DialogResult.OK Then
-                For i = 0 To Me.gFichier.RowCount - 1
-                    If Me.gFichier.Rows(i).Cells("TypeTrait").Value = Me.gFichier.Rows(e.RowIndex).Cells("TypeTrait").Value Then
-                        Call verifTraitement(i)
-                    End If
-                Next
+                F_ImportParam.LeFichier = Me.gFichier.Rows(e.RowIndex).Cells("FicLocal").Value
+                F_ImportParam.Lextension = Me.gFichier.Rows(e.RowIndex).Cells("Extension").Value
+                F_ImportParam.LeTraitId = Me.gFichier.Rows(e.RowIndex).Cells("ParamId").Value
+                F_ImportParam.LeTiersId = Me.leTiersId
+                F_ImportParam.LeTypeTrait = Me.gFichier.Rows(e.RowIndex).Cells("TypeTraitNom").Value
+                F_ImportParam.LeParam = Me.gFichier.Rows(e.RowIndex).Cells("Param").Value
+                If F_ImportParam.ShowDialog() = DialogResult.OK Then
+                    For i = 0 To Me.gFichier.RowCount - 1
+                        If Me.gFichier.Rows(i).Cells("TypeTraitNom").Value = Me.gFichier.Rows(e.RowIndex).Cells("TypeTraitNom").Value Then
+                            Call VerifTraitement(i)
+                        End If
+                    Next
+                End If
+                F_ImportParam.Dispose()
+            Else
+                MsgBox("Aucun Type de Traitement n'est défini pour ce client")
             End If
-            F_ImportParam.Dispose()
         End If
     End Sub
 
@@ -239,6 +265,6 @@ Public Class F_ImportListe
     End Sub
 
     Private Sub GFichier_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles gFichier.CellValidated
-        If e.RowIndex >= 0 And e.ColumnIndex = Me.gFichier.Columns("TypeTrait").Index Then Call verifTraitement(e.RowIndex)
+        If e.RowIndex >= 0 And e.ColumnIndex = Me.gFichier.Columns("TypeTraitNom").Index Then Call VerifTraitement(e.RowIndex)
     End Sub
 End Class

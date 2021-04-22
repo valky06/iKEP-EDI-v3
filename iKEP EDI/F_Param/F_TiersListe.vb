@@ -4,7 +4,7 @@
         Dim leRs As OleDb.OleDbDataReader
 
         Me.gTiers.Rows.Clear()
-        leRs = SqlLit("SELECT TiersId, TiersNom FROM app.Tiers", conSqlEDI)
+        leRs = SqlLit("SELECT TiersId, TiersNom FROM app.Tiers order by tiersnom", conSqlEDI)
         While leRs.Read
             Me.gTiers.Rows.Add(leRs("TiersId"), leRs("TiersNom"))
         End While

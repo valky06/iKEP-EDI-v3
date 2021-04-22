@@ -381,11 +381,6 @@ Public Class F_ImportCdeVente
         Return False
     End Function
 
-    Function ImportNouveau() As Integer
-        Dim idNew = SqlDo("INSERT INTO app.Import (IdUser, DateImport, TiersId) VALUES ('" & leUser.Id & "', '" & Now() & "', 0" & lTiers.SelectedItem.value & ")", conSqlEDI, True)
-        Return idNew
-    End Function
-
     Sub ImportAfficheNum(lenum As Integer, laDate As Date)
         If lenum > 0 Then
             tImport.Text = "N° " & lenum & " du " & laDate.ToString("dd/MM/yyyy HH:mm")
@@ -464,9 +459,6 @@ Public Class F_ImportCdeVente
         Try
             StatutBar("Recherche Traitement Tiers...")
 
-            lImportId = ImportNouveau()
-
-
             'Vérif chargement par fichier ou directement par base ERP
             sSql = "SELECT TiersLoadFile FROM app.Tiers WHERE TiersId = " & Me.lTiers.SelectedItem.Value
             leRs = SqlLit(sSql, conSqlEDI)
@@ -484,8 +476,10 @@ Public Class F_ImportCdeVente
             Else
                 StatutBar("Import Données Fichiers...")
                 F_ImportListe.leTiersId = Me.lTiers.SelectedItem.Value
-                F_ImportListe.lImportId = Me.lImportId
-                If F_ImportListe.ShowDialog() = DialogResult.OK Then bImp = True
+                If F_ImportListe.ShowDialog() = DialogResult.OK Then
+                    Me.lImportId = F_ImportListe.lImportId2
+                    bImp = True
+                End If
                 F_ImportListe.Dispose()
             End If
 
@@ -531,8 +525,6 @@ Public Class F_ImportCdeVente
     Private Sub F_ImportCdeVente_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Me.WindowState = FormWindowState.Maximized
         ListeTiers()
-
-
 
         My.Settings.Reload()
         If Year(My.Settings.DateModifFin) < 2050 Then
@@ -792,13 +784,12 @@ Public Class F_ImportCdeVente
 
                     Dim leFichier As String = "EDI_CDE_" & Now.ToString("ddMMyy_HHmm") & ".txt"
 
-                    My.Settings.Reload()
-                    lesParam.Clear()
-                    lesParam.Add(New SSISParam("ImportId", lImportId, "PACKAGE"))
-                    lesParam.Add(New SSISParam("SiteId", Me.lSite.SelectedItem.value, "PACKAGE"))
-                    '                    lesParam.Add(New SSISParam("TiersId", lTiers.SelectedItem.value, "PACKAGE"))
-                    lesParam.Add(New SSISParam("UserLogin", leUser.Login, "PACKAGE"))
-                    lesParam.Add(New SSISParam("LeFichier", "\\pmssqlc1\EDI\Export\" & leFichier, "PACKAGE"))
+                    'My.Settings.Reload()
+                    'lesParam.Clear()
+                    'lesParam.Add(New SSISParam("ImportId", lImportId, "PACKAGE"))
+                    'lesParam.Add(New SSISParam("SiteId", Me.lSite.SelectedItem.value, "PACKAGE"))
+                    'lesParam.Add(New SSISParam("UserLogin", leUser.Login, "PACKAGE"))
+                    'lesParam.Add(New SSISParam("LeFichier", "\\pmssqlc1\EDI\Export\" & leFichier, "PACKAGE"))
 
                     SSISexecute(leUser.RepSSIS, "DM_IN_CDV_Integre.dtsx", lesParam, "Ecriture des données -> ERP")
 
@@ -928,4 +919,10 @@ Public Class F_ImportCdeVente
         F_ImportArchive.ShowDialog()
         F_ImportArchive.Dispose()
     End Sub
+
+    Private Sub tImport_Click(sender As Object, e As EventArgs) Handles tImport.Click
+
+    End Sub
+
+
 End Class

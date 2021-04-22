@@ -35,7 +35,7 @@ Partial Class F_ImportListe
         Me.ImageList = New System.Windows.Forms.ImageList(Me.components)
         Me.FicLocal = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Extension = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TypeTrait = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.TypeTraitNom = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.ParamImg = New System.Windows.Forms.DataGridViewImageColumn()
         Me.Param = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ParamId = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -73,7 +73,7 @@ Partial Class F_ImportListe
         Me.gFichier.BackgroundColor = System.Drawing.SystemColors.ButtonFace
         Me.gFichier.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.gFichier.ColumnHeadersHeight = 30
-        Me.gFichier.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FicLocal, Me.Extension, Me.TypeTrait, Me.ParamImg, Me.Param, Me.ParamId})
+        Me.gFichier.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FicLocal, Me.Extension, Me.TypeTraitNom, Me.ParamImg, Me.Param, Me.ParamId})
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -139,12 +139,12 @@ Partial Class F_ImportListe
         Me.Extension.HeaderText = "Extension"
         Me.Extension.Name = "Extension"
         '
-        'TypeTrait
+        'TypeTraitNom
         '
-        Me.TypeTrait.FillWeight = 30.0!
-        Me.TypeTrait.HeaderText = "Type"
-        Me.TypeTrait.Items.AddRange(New Object() {"Cdes et Prév", "Commandes", "Prévisions"})
-        Me.TypeTrait.Name = "TypeTrait"
+        Me.TypeTraitNom.FillWeight = 30.0!
+        Me.TypeTraitNom.HeaderText = "Type"
+        Me.TypeTraitNom.Items.AddRange(New Object() {"Cdes et Prév", "Commandes", "Prévisions"})
+        Me.TypeTraitNom.Name = "TypeTraitNom"
         '
         'ParamImg
         '
@@ -194,7 +194,7 @@ Partial Class F_ImportListe
     Friend WithEvents ImageList As ImageList
     Friend WithEvents FicLocal As DataGridViewTextBoxColumn
     Friend WithEvents Extension As DataGridViewTextBoxColumn
-    Friend WithEvents TypeTrait As DataGridViewComboBoxColumn
+    Friend WithEvents TypeTraitNom As DataGridViewComboBoxColumn
     Friend WithEvents ParamImg As DataGridViewImageColumn
     Friend WithEvents Param As DataGridViewTextBoxColumn
     Friend WithEvents ParamId As DataGridViewTextBoxColumn

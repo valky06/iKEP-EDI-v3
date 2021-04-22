@@ -1136,7 +1136,7 @@ Partial Class F_ImportCdeVente
         '
         Me.lTiers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.lTiers.Name = "lTiers"
-        Me.lTiers.Size = New System.Drawing.Size(121, 25)
+        Me.lTiers.Size = New System.Drawing.Size(300, 25)
         '
         'tImport
         '

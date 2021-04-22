@@ -32,6 +32,17 @@
 
     End Sub
 
+    Sub ListeTrait()
+        gTypeTrait.Rows.Clear()
+
+        Dim leRs As OleDb.OleDbDataReader = SqlLit("SELECT TypeTraitId,TypeTraitNom,Ordre FROM app.TiersTypeTraitement WHERE TiersId = 0" & _tiersId, conSqlEDI)
+        While leRs.Read
+            gTypeTrait.Rows.Add(leRs("TypeTraitId"), leRs("TypeTraitNom"), leRs("Ordre"))
+        End While
+        leRs.Close()
+
+    End Sub
+
     Private Sub F_Tiers_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Dim leRs As OleDb.OleDbDataReader
 
@@ -96,6 +107,7 @@
                 FormRempli(Me, "SELECT TiersId, TiersNom, TiersLoadFile FROM app.Tiers WHERE TiersId = 0" & _tiersId, conSqlEDI)
                 ListeUser()
                 ListeSiteERP()
+                ListeTrait()
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -119,6 +131,15 @@
             With gTiersSiteERP.Rows(i)
                 If Nz(.Cells("SiteId").Value, 0) <> 0 Then
                     SqlDo("INSERT INTO app.TiersSiteERP (TiersId, SiteId, CodeERP) VALUES (" & _tiersId & ", '" & .Cells("SiteId").Value & "', '" & .Cells("CodeERP").Value & "')", conSqlEDI)
+                End If
+            End With
+        Next
+
+        SqlDo("DELETE FROM app.TiersTypeTraitement WHERE TiersId = 0" & _tiersId, conSqlEDI)
+        For i = 0 To gTypeTrait.Rows.Count - 1
+            With gTypeTrait.Rows(i)
+                If Nz(.Cells("TypeNom").Value, "") <> "" Then
+                    SqlDo("INSERT INTO app.TiersTypeTraitement (TiersId,TypeTraitNom,Ordre) VALUES (" & _tiersId & ",'" & .Cells("TypeNom").Value & "','" & .Cells("TypeOrdre").Value & "')", conSqlEDI)
                 End If
             End With
         Next
