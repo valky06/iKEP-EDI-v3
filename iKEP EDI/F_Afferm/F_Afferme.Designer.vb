@@ -22,27 +22,15 @@ Partial Class F_Afferme
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.tClient = New System.Windows.Forms.TextBox()
         Me.lblUniteHorizon = New System.Windows.Forms.Label()
         Me.lblHorizon = New System.Windows.Forms.Label()
         Me.tHorizon = New System.Windows.Forms.TextBox()
         Me.gAfferme = New System.Windows.Forms.DataGridView()
-        Me.Sel = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.SiteCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Client = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NumCde = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NumLigne = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Article = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NumCdeEDI = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NumLigneEDI = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateCde = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.QteCde = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CodeClient = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TmoJ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cSel = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnPtoF = New System.Windows.Forms.Button()
@@ -54,6 +42,19 @@ Partial Class F_Afferme
         Me.Label5 = New System.Windows.Forms.Label()
         Me.btnChargPrev = New System.Windows.Forms.Button()
         Me.bRetard = New System.Windows.Forms.CheckBox()
+        Me.Sel = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.SiteCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Client = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NumCde = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NumLigne = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Article = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NumCdeEDI = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NumLigneEDI = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Statut = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TmoJ = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateCde = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.QteCde = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CodeClient = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.gAfferme, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -103,7 +104,7 @@ Partial Class F_Afferme
         Me.gAfferme.BackgroundColor = System.Drawing.SystemColors.Control
         Me.gAfferme.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.gAfferme.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gAfferme.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Sel, Me.SiteCode, Me.Client, Me.NumCde, Me.NumLigne, Me.Article, Me.NumCdeEDI, Me.NumLigneEDI, Me.DateCde, Me.QteCde, Me.CodeClient, Me.TmoJ})
+        Me.gAfferme.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Sel, Me.SiteCode, Me.Client, Me.NumCde, Me.NumLigne, Me.Article, Me.NumCdeEDI, Me.NumLigneEDI, Me.Statut, Me.TmoJ, Me.DateCde, Me.QteCde, Me.CodeClient})
         Me.gAfferme.Location = New System.Drawing.Point(12, 64)
         Me.gAfferme.MultiSelect = False
         Me.gAfferme.Name = "gAfferme"
@@ -111,96 +112,6 @@ Partial Class F_Afferme
         Me.gAfferme.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.gAfferme.Size = New System.Drawing.Size(1287, 462)
         Me.gAfferme.TabIndex = 33
-        '
-        'Sel
-        '
-        Me.Sel.FillWeight = 15.0!
-        Me.Sel.HeaderText = "Sel"
-        Me.Sel.Name = "Sel"
-        Me.Sel.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'SiteCode
-        '
-        Me.SiteCode.FillWeight = 20.0!
-        Me.SiteCode.HeaderText = "Site"
-        Me.SiteCode.Name = "SiteCode"
-        '
-        'Client
-        '
-        Me.Client.HeaderText = "Client"
-        Me.Client.Name = "Client"
-        Me.Client.ReadOnly = True
-        '
-        'NumCde
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.NumCde.DefaultCellStyle = DataGridViewCellStyle5
-        Me.NumCde.FillWeight = 30.0!
-        Me.NumCde.HeaderText = "N°Cde"
-        Me.NumCde.Name = "NumCde"
-        Me.NumCde.ReadOnly = True
-        '
-        'NumLigne
-        '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.NumLigne.DefaultCellStyle = DataGridViewCellStyle6
-        Me.NumLigne.FillWeight = 20.0!
-        Me.NumLigne.HeaderText = "Ligne"
-        Me.NumLigne.Name = "NumLigne"
-        Me.NumLigne.ReadOnly = True
-        Me.NumLigne.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Article
-        '
-        Me.Article.FillWeight = 80.0!
-        Me.Article.HeaderText = "Article"
-        Me.Article.Name = "Article"
-        Me.Article.ReadOnly = True
-        '
-        'NumCdeEDI
-        '
-        Me.NumCdeEDI.HeaderText = "Commande EDI"
-        Me.NumCdeEDI.Name = "NumCdeEDI"
-        '
-        'NumLigneEDI
-        '
-        Me.NumLigneEDI.FillWeight = 20.0!
-        Me.NumLigneEDI.HeaderText = "Ligne EDI"
-        Me.NumLigneEDI.Name = "NumLigneEDI"
-        '
-        'DateCde
-        '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle7.Format = "d"
-        DataGridViewCellStyle7.NullValue = Nothing
-        Me.DateCde.DefaultCellStyle = DataGridViewCellStyle7
-        Me.DateCde.FillWeight = 30.0!
-        Me.DateCde.HeaderText = "Date Cde"
-        Me.DateCde.Name = "DateCde"
-        Me.DateCde.ReadOnly = True
-        Me.DateCde.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'QteCde
-        '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle8.Format = "N2"
-        Me.QteCde.DefaultCellStyle = DataGridViewCellStyle8
-        Me.QteCde.FillWeight = 30.0!
-        Me.QteCde.HeaderText = "Qté Totale"
-        Me.QteCde.Name = "QteCde"
-        Me.QteCde.ReadOnly = True
-        '
-        'CodeClient
-        '
-        Me.CodeClient.HeaderText = "CodeClient"
-        Me.CodeClient.Name = "CodeClient"
-        Me.CodeClient.Visible = False
-        '
-        'TmoJ
-        '
-        Me.TmoJ.HeaderText = "TMO"
-        Me.TmoJ.Name = "TmoJ"
-        Me.TmoJ.Visible = False
         '
         'cSel
         '
@@ -308,6 +219,104 @@ Partial Class F_Afferme
         Me.bRetard.Text = "Retard"
         Me.bRetard.UseVisualStyleBackColor = True
         '
+        'Sel
+        '
+        Me.Sel.FillWeight = 17.15965!
+        Me.Sel.HeaderText = "Sel"
+        Me.Sel.Name = "Sel"
+        Me.Sel.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'SiteCode
+        '
+        Me.SiteCode.FillWeight = 22.87953!
+        Me.SiteCode.HeaderText = "Site"
+        Me.SiteCode.Name = "SiteCode"
+        '
+        'Client
+        '
+        Me.Client.FillWeight = 114.3976!
+        Me.Client.HeaderText = "Client"
+        Me.Client.Name = "Client"
+        Me.Client.ReadOnly = True
+        '
+        'NumCde
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.NumCde.DefaultCellStyle = DataGridViewCellStyle1
+        Me.NumCde.FillWeight = 34.31929!
+        Me.NumCde.HeaderText = "N°Cde"
+        Me.NumCde.Name = "NumCde"
+        Me.NumCde.ReadOnly = True
+        '
+        'NumLigne
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.NumLigne.DefaultCellStyle = DataGridViewCellStyle2
+        Me.NumLigne.FillWeight = 22.87953!
+        Me.NumLigne.HeaderText = "Ligne"
+        Me.NumLigne.Name = "NumLigne"
+        Me.NumLigne.ReadOnly = True
+        Me.NumLigne.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Article
+        '
+        Me.Article.FillWeight = 91.51811!
+        Me.Article.HeaderText = "Article"
+        Me.Article.Name = "Article"
+        Me.Article.ReadOnly = True
+        '
+        'NumCdeEDI
+        '
+        Me.NumCdeEDI.FillWeight = 114.3976!
+        Me.NumCdeEDI.HeaderText = "Commande EDI"
+        Me.NumCdeEDI.Name = "NumCdeEDI"
+        '
+        'NumLigneEDI
+        '
+        Me.NumLigneEDI.FillWeight = 22.87953!
+        Me.NumLigneEDI.HeaderText = "Ligne EDI"
+        Me.NumLigneEDI.Name = "NumLigneEDI"
+        '
+        'Statut
+        '
+        Me.Statut.FillWeight = 20.0!
+        Me.Statut.HeaderText = "Statut"
+        Me.Statut.Name = "Statut"
+        '
+        'TmoJ
+        '
+        Me.TmoJ.FillWeight = 20.0!
+        Me.TmoJ.HeaderText = "TMO"
+        Me.TmoJ.Name = "TmoJ"
+        '
+        'DateCde
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.Format = "d"
+        DataGridViewCellStyle3.NullValue = Nothing
+        Me.DateCde.DefaultCellStyle = DataGridViewCellStyle3
+        Me.DateCde.FillWeight = 34.31929!
+        Me.DateCde.HeaderText = "Date Cde"
+        Me.DateCde.Name = "DateCde"
+        Me.DateCde.ReadOnly = True
+        Me.DateCde.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'QteCde
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle4.Format = "N2"
+        Me.QteCde.DefaultCellStyle = DataGridViewCellStyle4
+        Me.QteCde.FillWeight = 34.31929!
+        Me.QteCde.HeaderText = "Qté Totale"
+        Me.QteCde.Name = "QteCde"
+        Me.QteCde.ReadOnly = True
+        '
+        'CodeClient
+        '
+        Me.CodeClient.HeaderText = "CodeClient"
+        Me.CodeClient.Name = "CodeClient"
+        Me.CodeClient.Visible = False
+        '
         'F_Afferme
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -351,6 +360,8 @@ Partial Class F_Afferme
     Friend WithEvents lSiteAfferm As ComboBox
     Friend WithEvents bTmo As CheckBox
     Friend WithEvents Label5 As Label
+    Friend WithEvents btnChargPrev As Button
+    Friend WithEvents bRetard As CheckBox
     Friend WithEvents Sel As DataGridViewCheckBoxColumn
     Friend WithEvents SiteCode As DataGridViewTextBoxColumn
     Friend WithEvents Client As DataGridViewTextBoxColumn
@@ -359,10 +370,9 @@ Partial Class F_Afferme
     Friend WithEvents Article As DataGridViewTextBoxColumn
     Friend WithEvents NumCdeEDI As DataGridViewTextBoxColumn
     Friend WithEvents NumLigneEDI As DataGridViewTextBoxColumn
+    Friend WithEvents Statut As DataGridViewTextBoxColumn
+    Friend WithEvents TmoJ As DataGridViewTextBoxColumn
     Friend WithEvents DateCde As DataGridViewTextBoxColumn
     Friend WithEvents QteCde As DataGridViewTextBoxColumn
     Friend WithEvents CodeClient As DataGridViewTextBoxColumn
-    Friend WithEvents TmoJ As DataGridViewTextBoxColumn
-    Friend WithEvents btnChargPrev As Button
-    Friend WithEvents bRetard As CheckBox
 End Class

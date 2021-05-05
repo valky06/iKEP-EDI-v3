@@ -32,7 +32,7 @@
             gAfferme.Visible = False
             gAfferme.Rows.Clear()
 
-            sSql = "SELECT P.SiteCode, P.NumCommande, P.LigneCommande, P.CliCode, P.CliNom, P.DateLivr, P.ArtCode, P.Qte, P.NumCdeEDI, P.NumLigneEDI, P.TmoJour, A.AffId " _
+            sSql = "SELECT P.SiteCode, P.NumCommande, P.LigneCommande, P.CliCode, P.CliNom, P.DateLivr, P.ArtCode, P.Qte, P.NumCdeEDI, P.NumLigneEDI, P.TmoJour, P.Statut, A.AffId " _
                         & " FROM CommandeVente_Prev AS P " _
                         & " LEFT JOIN CommandeVente_Affermie AS A ON P.SiteCode = A.SiteCode And P.NumCommande = A.NumCde And P.LigneCommande = A.NumLigne AND P.DateLivr = A.DateBesoin " _
                         & " WHERE P.UserLogin = '" & leUser.Login & "' "
@@ -49,13 +49,12 @@
                     selC = True
                 End If
 
-                gAfferme.Rows.Add(False, Nz(lers("SiteCode"), ""), Nz(lers("CliCode"), "") & " - " & Nz(lers("CliNom"), ""), Nz(lers("NumCommande"), ""), Nz(lers("LigneCommande"), ""), Nz(lers("ArtCode"), ""), Nz(lers("NumCdeEDI"), ""), Nz(lers("NumLigneEDI"), ""), Nz(lers("DateLivr"), ""), Val(Nz(lers("Qte"), 0)), lers("CliCode"), Val(Nz(lers("TmoJour"), 0)))
+                gAfferme.Rows.Add(False, Nz(lers("SiteCode"), ""), Nz(lers("CliCode"), "") & " - " & Nz(lers("CliNom"), ""), Nz(lers("NumCommande"), ""), Nz(lers("LigneCommande"), ""), Nz(lers("ArtCode"), ""), Nz(lers("NumCdeEDI"), ""), Nz(lers("NumLigneEDI"), ""), Nz(lers("Statut"), ""), Val(Nz(lers("TmoJour"), 0)), Nz(lers("DateLivr"), ""), Val(Nz(lers("Qte"), 0)), lers("CliCode"))
                 gAfferme.Rows(gAfferme.Rows.Count - 1).Cells(0).ReadOnly = selC
 
                 'Mise en forme des cellules de la  nouvelle ligne
                 With gAfferme.Rows(gAfferme.RowCount - 1)
                     If .Cells("DateCde").Value <> "" Then
-
                         Dim dShift As Date = Now.AddDays(If(Nz(tHorizon.Text, "0") <> "0", Int32.Parse(tHorizon.Text), 0)).AddDays(If(bTmo.Checked, Int32.Parse(.Cells("TmoJ").Value), 0))
                         If dShift > CDate(.Cells("DateCde").Value) Then
                             .Cells("DateCde").Style.BackColor = coulRecule
@@ -65,6 +64,13 @@
                     If .Cells("Sel").ReadOnly Then
                         .Cells("Sel").Style.BackColor = Color.LightGray
                     End If
+
+                    If .Cells("Statut").Value = "F" Then
+                        .Cells("Statut").Style.BackColor = coulAvance
+                        .Cells("Sel").ReadOnly = True
+                        .Cells("Sel").Style.BackColor = Color.LightGray
+                    End If
+
                 End With
             End While
 
@@ -145,7 +151,6 @@
             For i = 0 To gAfferme.RowCount - 1
                 With gAfferme.Rows(i)
                     If Nz(.Cells("Sel").Value, False) = True Then
-
                         InsertAffermie(.Cells("SiteCode").Value, .Cells("CodeClient").Value, .Cells("NumCde").Value, .Cells("NumLigne").Value, .Cells("Article").Value, .Cells("NumCdeEDI").Value, .Cells("NumLigneEDI").Value, Nz(.Cells("QteCde").Value, 0), .Cells("DateCde").Value, "P", "F", leUser.Login)
                     End If
                 End With
