@@ -18,7 +18,7 @@
       <Value Profile="(Default)">12</Value>
     </Setting>
     <Setting Name="HorizonAfferme" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">2</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="CheminDoc" Type="System.String" Scope="User">
       <Value Profile="(Default)">\\nasc1.kep.local\Data\ERP\BI\EDI\Doc\</Value>

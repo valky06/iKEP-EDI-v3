@@ -55,7 +55,7 @@ Public Class F_ImportListe
 
 
     Private Sub TiersPLus_Click(sender As Object, e As EventArgs) Handles TiersPLus.Click
-        Dim c As DataGridViewComboBoxCell
+        'Dim c As DataGridViewComboBoxCell
         oFileDialog.FileName = ""
         '    oFileDialog.Filter = "Excel|*.xls;*.xlsx|Text |*.txt;*.csv"
         oFileDialog.Filter = "Excel|*.xls;*.xlsx"
@@ -73,7 +73,7 @@ Public Class F_ImportListe
         If Me.gFichier.SelectedRows.Count > 0 Then Me.gFichier.Rows.RemoveAt(Me.gFichier.SelectedRows(0).Index)
     End Sub
 
-    Function ImportCdeVente(ImportId As Integer, FichierSource As String, MAZ As String, typeimport As String) As Boolean
+    Function ImportCdeVente(FichierSource As String, MAZ As String, typeimport As String) As Boolean
         Dim importOK As Boolean = False
         Dim lesParam As New List(Of SSISParam)
         Try
@@ -90,7 +90,6 @@ Public Class F_ImportListe
 
         Catch ex As Exception
             MsgBox(ex.Message)
-            importOK = False
             Throw New Exception(ex.Message)
         End Try
         Return importOK
@@ -210,7 +209,7 @@ Public Class F_ImportListe
                     XLApp.ActiveWorkbook.Close(False)
 
                     StatutBar("Importaton des données")
-                    Call ImportCdeVente(lImportId2, leNomSourceServer & ".csv", IIf(i = 0, "O", "N"), Me.gFichier.Rows(i).Cells("TypeTraitNom").Value)
+                    ImportCdeVente(leNomSourceServer & ".csv", IIf(i = 0, "O", "N"), Me.gFichier.Rows(i).Cells("TypeTraitNom").Value)
 
                 Next i
 

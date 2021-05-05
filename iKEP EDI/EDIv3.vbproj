@@ -30,8 +30,8 @@
     <ProductName>iKEP - EDI</ProductName>
     <PublisherName>iKEP</PublisherName>
     <SuiteName>iKEP - EDI</SuiteName>
-    <ApplicationRevision>5</ApplicationRevision>
-    <ApplicationVersion>3.0.1.5</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>3.0.2.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -70,7 +70,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>08780C6583C1BD11434EC4826E6769CD4A96E434</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>8B122D88F8F35E38C375AFA2849DBB3B35B87B20</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>
@@ -328,6 +328,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="F_Import\F_ImportCdeVente.resx">
       <DependentUpon>F_ImportCdeVente.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Global\F_SSISAttente.resx">
       <DependentUpon>F_SSISAttente.vb</DependentUpon>

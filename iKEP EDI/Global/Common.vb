@@ -97,7 +97,7 @@ Public Module Common
             Threading.Thread.Sleep(100)
         End While
 
-        F_Main.Focus()
+        'F_Main.Focus()
     End Sub
 
     Public Sub StatutBar(s As String)

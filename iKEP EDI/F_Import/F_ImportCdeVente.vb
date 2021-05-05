@@ -14,9 +14,9 @@ Public Class F_ImportCdeVente
         If Me.lSite.SelectedIndex >= 0 Then F_Main.sContext.Text &= " Site:" & Me.lSite.SelectedItem.value
     End Sub
 
-    Sub listesite()
+    Sub Listesite()
         ComboRempli("select S.SiteId,S.SiteNom from app.UserSite US inner join app.Site S on S.SiteId= US.SiteId where US.UserId=" & leUser.Id _
-            & " And S.SiteId in (select distinct SiteId from app.TiersSiteERP where tiersid=" & Me.lTiers.SelectedItem.value & " )", lSite, conSqlEDI)
+            & " And S.SiteId in (select distinct SiteId from app.TiersSiteERP where tiersid = " & Me.lTiers.SelectedItem.value & " )", lSite, conSqlEDI)
 
         If lSite.Items.Count > 0 Then
             lSite.SelectedIndex = 0
@@ -100,8 +100,8 @@ Public Class F_ImportCdeVente
             If filtreMsg <> "" Then filtreMsg = "And (" & filtreMsg.Remove(0, 3) & ")"
         End If
 
-        sSql = "SELECT   NumCdeEDI_Tiers,  Article,  ArtDesc_Tiers,  MsgLigne, qtebesoin FROM  CommandeVente_Anomalie" _
-        & " WHERE NumCdeEDI_Tiers <> '' and ImportId=" & lImportId & " and siteid=" & Me.lSite.SelectedItem.value _
+        sSql = "SELECT NumCdeEDI_Tiers,  Article,  ArtDesc_Tiers,  MsgLigne, qtebesoin FROM  CommandeVente_Anomalie" _
+        & " WHERE NumCdeEDI_Tiers <> '' and ImportId = 0" & lImportId & " and siteid = 0" & Me.lSite.SelectedItem.value _
         & filtreMsg
 
         If Me.tArt_AE.Text <> "" Then sSql &= "And article like '%" & Me.tArt_AE.Text & "%'"
@@ -353,7 +353,6 @@ Public Class F_ImportCdeVente
         If NbCommande > 1 Then tNbContrat.Text += "s"
 
     End Sub
-
 
     Function ExecuteBilan() As Boolean
         Dim lesParam As New List(Of SSISParam)
@@ -676,6 +675,7 @@ Public Class F_ImportCdeVente
         End If
     End Sub
 
+    ' Selection TOUT
     Private Sub CSel_CheckedChanged(sender As Object, e As EventArgs) Handles cSel.CheckedChanged
         For i = 0 To gImport.RowCount - 1
             If Nz(gImport.Rows(i).Cells("NumCdeEDI_Tiers").Value, "") <> "" Then
@@ -688,7 +688,7 @@ Public Class F_ImportCdeVente
 
         'récupère le dernier ImportId du Tiers/Utilisateur
         lImportId = ImportDernier()
-        listesite()
+        Listesite()
 
         'bRetraiter.Enabled = False
         bImporter.Enabled = True
@@ -697,7 +697,7 @@ Public Class F_ImportCdeVente
 
         lSite_SelectedIndexChanged(Nothing, Nothing)
 
-        Call AfficheContext()
+        AfficheContext()
     End Sub
 
     Private Sub TextBox1_KeyUp(sender As Object, e As KeyEventArgs) Handles tArticle.KeyUp, tCommande.KeyUp
@@ -784,12 +784,12 @@ Public Class F_ImportCdeVente
 
                     Dim leFichier As String = "EDI_CDE_" & Now.ToString("ddMMyy_HHmm") & ".txt"
 
-                    'My.Settings.Reload()
-                    'lesParam.Clear()
-                    'lesParam.Add(New SSISParam("ImportId", lImportId, "PACKAGE"))
-                    'lesParam.Add(New SSISParam("SiteId", Me.lSite.SelectedItem.value, "PACKAGE"))
-                    'lesParam.Add(New SSISParam("UserLogin", leUser.Login, "PACKAGE"))
-                    'lesParam.Add(New SSISParam("LeFichier", "\\pmssqlc1\EDI\Export\" & leFichier, "PACKAGE"))
+                    My.Settings.Reload()
+                    lesParam.Clear()
+                    lesParam.Add(New SSISParam("ImportId", lImportId, "PACKAGE"))
+                    lesParam.Add(New SSISParam("SiteId", Me.lSite.SelectedItem.value, "PACKAGE"))
+                    lesParam.Add(New SSISParam("UserLogin", leUser.Login, "PACKAGE"))
+                    lesParam.Add(New SSISParam("LeFichier", "\\pmssqlc1\EDI\Export\" & leFichier, "PACKAGE"))
 
                     SSISexecute(leUser.RepSSIS, "DM_IN_CDV_Integre.dtsx", lesParam, "Ecriture des données -> ERP")
 
@@ -808,7 +808,6 @@ Public Class F_ImportCdeVente
         GImportContrat_CellContentClick(sender, e)
     End Sub
 
-
     Private Sub BTransfert_Click(sender As Object, e As EventArgs) Handles bTransfert.Click
         ArchiveTransfertCde()
     End Sub
@@ -824,8 +823,6 @@ Public Class F_ImportCdeVente
         OptionAnoContratInit(optionToutAnoContrat.Checked)
     End Sub
 
-
-
     Private Sub OptionToutAnoCde_CheckedChanged(sender As Object, e As EventArgs) Handles optionToutAnoCde.CheckedChanged
         OptionAnoCdeInit(optionToutAnoCde.Checked)
     End Sub
@@ -837,8 +834,6 @@ Public Class F_ImportCdeVente
     Private Sub OptionToutContrat_CheckedChanged(sender As Object, e As EventArgs) Handles optionToutContrat.CheckedChanged
         OptionContratInit(optionToutContrat.Checked)
     End Sub
-
-
 
     'Private Sub LinkLabel1_LinkClicked_2(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles bEncours.Click
     '    Dim impE As F_ImportEncours = New F_ImportEncours
@@ -919,10 +914,5 @@ Public Class F_ImportCdeVente
         F_ImportArchive.ShowDialog()
         F_ImportArchive.Dispose()
     End Sub
-
-    Private Sub tImport_Click(sender As Object, e As EventArgs) Handles tImport.Click
-
-    End Sub
-
 
 End Class

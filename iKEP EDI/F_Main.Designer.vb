@@ -57,7 +57,7 @@ Partial Class F_Main
         'sLabel
         '
         Me.sLabel.Name = "sLabel"
-        Me.sLabel.Size = New System.Drawing.Size(1141, 17)
+        Me.sLabel.Size = New System.Drawing.Size(1110, 17)
         Me.sLabel.Spring = True
         Me.sLabel.Text = "Etat"
         Me.sLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft
@@ -106,7 +106,6 @@ Partial Class F_Main
         '
         'mAfferme
         '
-        Me.mAfferme.Enabled = False
         Me.mAfferme.Name = "mAfferme"
         Me.mAfferme.Size = New System.Drawing.Size(80, 20)
         Me.mAfferme.Text = "Cmdes P>F"
