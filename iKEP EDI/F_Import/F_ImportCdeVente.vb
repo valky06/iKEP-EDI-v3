@@ -842,19 +842,6 @@ Public Class F_ImportCdeVente
         OptionContratInit(optionToutContrat.Checked)
     End Sub
 
-    'Private Sub LinkLabel1_LinkClicked_2(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles bEncours.Click
-    '    Dim impE As F_ImportEncours = New F_ImportEncours
-    '    impE.ShowDialog()
-    '    impE.Dispose()
-    'End Sub
-
-    'Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles bArchives.Click
-
-    '    If lTiers.SelectedIndex < 0 Then Exit Sub
-    '    F_ImportArchive.leTiers = lTiers.SelectedItem.value
-    '    F_ImportArchive.ShowDialog()
-    '    F_ImportArchive.Dispose()
-    'End Sub
 
     Private Sub ToolStripLabel1_Click(sender As Object, e As EventArgs)
         Me.Dispose()
