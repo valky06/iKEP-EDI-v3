@@ -1004,6 +1004,7 @@ Partial Class F_ImportCdeVente
         '
         Me.gAnoCde.AllowUserToAddRows = False
         Me.gAnoCde.AllowUserToDeleteRows = False
+        Me.gAnoCde.AllowUserToResizeRows = False
         Me.gAnoCde.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)

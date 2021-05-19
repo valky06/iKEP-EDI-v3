@@ -750,6 +750,7 @@ Public Class F_ImportCdeVente
         '        Dim d As Date
         Dim StatutLigne As String = ""
         Dim lesEncoursSelect As String = ""
+        Dim typeBesoin As String = ""
         Dim lesParam As New List(Of SSISParam)
 
         ' ...
@@ -769,11 +770,17 @@ Public Class F_ImportCdeVente
                             If Nz(.Cells(0).Value, False) = True Then
                                 'Archivage transfert
                                 'd = .Cells("DateBesoin").Value
+                                If Nz(.Cells("TypeCde_ERP").Value, "") = "F" Then
+                                    typeBesoin = Nz(.Cells("TypeCde_ERP").Value, "")
+                                Else
+                                    typeBesoin = Nz(.Cells("TypeBesoin").Value, "")
+                                End If
+
                                 sSql &= "INSERT INTO CommandeVente_Transfert (lId, ImportId, NumCdeEDI, NumLigneEDI, Article, ArtDesc, TypeBesoin, DateBesoin, QteBesoin, TypeCde_ERP, NumCde_ERP, NumLigne_ERP, DateCde, QteCde, ArtCode_ERP, NumLigne_Prop, DateTransfert, StatutTransfert, CodeClient, StatutAffiche,siteId )" _
                                 & " VALUES (" _
                                 & "'" & .Cells("lId").Value & "', 0" & lImportId & ", " _
                                 & "'" & Nz(.Cells("NumCdeEDI_Tiers").Value, "") & "', '" & Nz(.Cells("NumLigneEDI_Tiers").Value, "") & "', '" & Nz(.Cells("ArtCode_Tiers").Value, "") & "', '" & Nz(.Cells("ArtDesc_Tiers").Value, "").Replace("'", "''") & "', " _
-                                & "'" & Nz(.Cells("TypeBesoin").Value, "") & "', '" & Nz(.Cells("DateBesoin").Value, "") & "', 0" & Txt2sql(Nz(.Cells("QteBesoin").Value, "0")) & ", '" & Nz(.Cells("TypeCde_ERP").Value, "") & "', " _
+                                & "'" & typeBesoin & "', '" & Nz(.Cells("DateBesoin").Value, "") & "', 0" & Txt2sql(Nz(.Cells("QteBesoin").Value, "0")) & ", '" & Nz(.Cells("TypeCde_ERP").Value, "") & "', " _
                                 & "'" & Nz(.Cells("NumCde_ERP").Value, "") & "', '" & Nz(.Cells("NumLigneCde_ERP").Value, "") & "', '" & Nz(.Cells("DateCde").Value, "") & "', 0" & Txt2sql(Nz(.Cells("QteCde").Value, "0")) & ", " _
                                 & "'" & Nz(.Cells("ArtCode_ERP").Value, "") & "', '" & Nz(.Cells("NumLigne_Prop").Value, "") & "', '" & Now & "', 'D', '" & .Cells("CodeClient").Value & "', 1," & Me.lSite.SelectedItem.value & ")"
                             End If
@@ -787,13 +794,13 @@ Public Class F_ImportCdeVente
                     My.Settings.Reload()
                     lesParam.Clear()
                     lesParam.Add(New SSISParam("ImportId", lImportId, "PACKAGE"))
-                    lesParam.Add(New SSISParam("SiteId", Me.lSite.SelectedItem.value, "PACKAGE"))
+                    lesParam.Add(New SSISParam("SiteId", lSite.SelectedItem.Value, "PACKAGE"))
                     lesParam.Add(New SSISParam("UserLogin", leUser.Login, "PACKAGE"))
                     lesParam.Add(New SSISParam("LeFichier", "\\pmssqlc1\EDI\Export\" & leFichier, "PACKAGE"))
 
                     SSISexecute(leUser.RepSSIS, "DM_IN_CDV_Integre.dtsx", lesParam, "Ecriture des données -> ERP")
 
-                    FileCopy("\\pmssqlc1\EDI\Export\" & leFichier, My.Settings.CheminExportTOPS & leFichier)
+                    If lSite.SelectedItem.Value = 3 Or lSite.SelectedItem.Value = 4 Then FileCopy("\\pmssqlc1\EDI\Export\" & leFichier, My.Settings.CheminExportTOPS & leFichier)
 
                 Catch ex As Exception
                     MsgBox(ex.Message)
