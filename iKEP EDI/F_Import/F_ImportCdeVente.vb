@@ -240,14 +240,14 @@ Public Class F_ImportCdeVente
             'Nouvelle comande ?
             If Nz(lers("NumCdeEDI_Tiers"), "") <> precVal Then
                 NbCommande += 1
-                precVal = Nz(lers("NumCdeEDI_Tiers"), "")
                 If cumulCde = 0 Then ecart = 0 Else ecart = Math.Round(((cumulBesoin / cumulCde - 1)), 2)
                 If gImport.RowCount > 0 Then
-                    gImport.Rows.Add(False, "", "", "", "", Me.iML.Images(0), "", "", "", "", cumulBesoin, cumulCde, IIf(ecart = 0, "", ecart.ToString("0%")),
+                    gImport.Rows.Add(False, precVal, "", "", "", Me.iML.Images(0), "", "", "", "", cumulBesoin, cumulCde, IIf(ecart = 0, "", ecart.ToString("0%")),
                                       "", "", "", "", "", "", "", "", "", msgCde)
                     gImport.Rows(gImport.RowCount - 1).DefaultCellStyle.BackColor = Color.LightGray
                     gImport.Rows(gImport.RowCount - 1).ReadOnly = True
                 End If
+                precVal = Nz(lers("NumCdeEDI_Tiers"), "")
                 Cumul = 0
                 cumulBesoin = 0
                 cumulCde = 0
@@ -338,7 +338,7 @@ Public Class F_ImportCdeVente
 
         'Dernière Ligne de total
         If cumulCde = 0 Then ecart = 0 Else ecart = Math.Round(((cumulBesoin / cumulCde - 1)), 2)
-        gImport.Rows.Add(False, "", "", "", "", Me.iML.Images(0), "", "", "", "", cumulBesoin, cumulCde, IIf(ecart = 0, "", ecart.ToString("0%")), "", "", "", "", "", "", "", "", "", msgCde)
+        gImport.Rows.Add(False, precVal, "", "", "", Me.iML.Images(0), "", "", "", "", cumulBesoin, cumulCde, IIf(ecart = 0, "", ecart.ToString("0%")), "", "", "", "", "", "", "", "", "", msgCde)
         gImport.Rows(gImport.RowCount - 1).DefaultCellStyle.BackColor = Color.LightGray
         gImport.Rows(gImport.RowCount - 1).ReadOnly = True
 
@@ -657,22 +657,36 @@ Public Class F_ImportCdeVente
 
     Private Sub GImportContrat_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles gImport.CellContentClick
         Dim i As Integer
-        Dim Laligne As Integer
         Dim b As Boolean
-        If e.ColumnIndex < 1 AndAlso Nz(Me.gImport.Rows(e.RowIndex).Cells("NumCdeEDI_Tiers").Value, "") <> "" Then
-            Laligne = e.RowIndex
-            i = Laligne
+        Dim laCde As String
+        'If e.ColumnIndex < 1 AndAlso Nz(Me.gImport.Rows(e.RowIndex).Cells("NumCdeEDI_Tiers").Value, "") <> "" Then
+        '    Laligne = e.RowIndex
+        '    i = Laligne
+        '    b = Me.gImport(0, i).Value
+
+        '    ' Remonte à la 1ere ligne de la commande
+        '    While i > 0 AndAlso Nz(Me.gImport.Rows(i - 1).Cells("NumCdeEDI_Tiers").Value, "") <> "" : i -= 1 : End While
+
+        '    'coche les lignes de la commande
+        '    While Me.gImport.Rows(i).Cells("NumCdeEDI_Tiers").Value <> "" And i < Me.gImport.RowCount - 1
+        '        Me.gImport.Rows(i).Cells("SelContrat").Value = Not b
+        '        i += 1
+        '    End While
+        'End If
+        If e.ColumnIndex < 1 AndAlso Nz(Me.gImport.Rows(e.RowIndex).Cells("ArtCode_Tiers").Value, "") = "" Then
+            i = e.RowIndex
             b = Me.gImport(0, i).Value
-
+            laCde = Me.gImport(1, i).Value
+            Me.gImport.Rows(i).Cells("SelContrat").Value = Not b
             ' Remonte à la 1ere ligne de la commande
-            While i > 0 AndAlso Nz(Me.gImport.Rows(i - 1).Cells("NumCdeEDI_Tiers").Value, "") <> "" : i -= 1 : End While
-
-            'coche les lignes de la commande
-            While Me.gImport.Rows(i).Cells("NumCdeEDI_Tiers").Value <> "" And i < Me.gImport.RowCount - 1
+            While i > 0 AndAlso Nz(Me.gImport.Rows(i - 1).Cells("NumCdeEDI_Tiers").Value, "") = laCde
+                i -= 1
                 Me.gImport.Rows(i).Cells("SelContrat").Value = Not b
-                i += 1
             End While
+            'coche les lignes de la commande
+
         End If
+
     End Sub
 
     ' Selection TOUT
