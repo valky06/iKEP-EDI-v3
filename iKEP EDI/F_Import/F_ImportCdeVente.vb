@@ -781,7 +781,7 @@ Public Class F_ImportCdeVente
                     For i = 0 To Me.gImport.RowCount - 2
 
                         With Me.gImport.Rows(i)
-                            If Nz(.Cells(0).Value, False) = True Then
+                            If Nz(.Cells(0).Value, False) = True And Nz(.Cells("ArtCode_Tiers").Value, "") <> "" Then
                                 'Archivage transfert
                                 'd = .Cells("DateBesoin").Value
                                 If Nz(.Cells("TypeCde_ERP").Value, "") = "F" Then
