@@ -136,7 +136,7 @@ Public Class F_ImportCdeVente
         If AvecFiltre Then
             If Me.optionG.Checked Then filtreMsg &= " or MsgLigne like '%G%'"
             If Me.optionH.Checked Then filtreMsg &= " or MsgLigne like '%H%'"
-            If Me.optionM.Checked Then filtreMsg &= " or MsgLigne like '%M%'"
+            If Me.optionX.Checked Then filtreMsg &= " or MsgLigne like '%X%'"
             If Me.tCde_AC.Text <> "" Then filtreMsg &= "or NumCdeEDI_ERP like '%" & Me.tCde_AC.Text & "%'"
             If Me.tCde_AC.Text <> "" Then filtreMsg &= "or NumCde_ERP like '%" & Me.tCde_AC.Text & "%'"
             If Me.tArt_AC.Text <> "" Then filtreMsg &= "or ArtCode_ERP like '%" & Me.tArt_AC.Text & "%'"
@@ -187,6 +187,8 @@ Public Class F_ImportCdeVente
         Dim NbCommande As Integer = 0
         Dim d1 As Date = Now
         Dim NumLigneMini As Integer
+        Dim NumLigneMiniInit As Integer = 0
+        Dim lartCli As String = ""
 
         'My.Settings.HorizonContratDeb = Me.tHorizonContratDeb.Text
         'My.Settings.HorizonContratFin = Me.tHorizonContratFin.Text
@@ -213,6 +215,7 @@ Public Class F_ImportCdeVente
         If optionD.Checked Then FiltreMsg &= " OR MsgCde LIKE '%D%'"
         If optionL.Checked Then FiltreMsg &= " OR MsgCde LIKE '%L%'"
         If optionS.Checked Then FiltreMsg &= " OR MsgCde LIKE '%S%'"
+        If OptionM.Checked Then FiltreMsg &= " OR MsgCde LIKE '%M%'"
 
         '        If Me.optionAutreMsg.Checked Then FiltreMsg &= " or msgLigneCumul <> ''"
         If FiltreMsg <> "" Then FiltreMsg = "And (" & FiltreMsg.Remove(0, 3) & ")" Else FiltreMsg = " and 1=2 "
@@ -231,7 +234,10 @@ Public Class F_ImportCdeVente
         'TODO:        If dModifFin.Checked Then sSql &= " AND date1ereModif <= " & Date2sql(dModifFin.Value)
         sSql &= FiltreMsg
         sSql &= " and NumCdeEDI_Tiers not in (   select distinct NumCdeEDI from CommandeVente_Transfert where ImportId = " & lImportId & " and statutaffiche=1)"
-        sSql &= "order by NumCdeEDI_Tiers, article, NumLigneEDI_Tiers, dateLigne"
+
+        ' sSql &= "order by NumCdeEDI_Tiers, article, NumLigneEDI_Tiers, dateLigne"  
+        'correction LV 18/06
+        sSql &= "order by NumCdeEDI_Tiers, CodeClient, article, ArtCode_ERP, NumLigneEDI_Tiers, dateLigne"
 
         lers = SqlLit(sSql, conSqlEDI)
         While lers.Read
@@ -254,6 +260,7 @@ Public Class F_ImportCdeVente
                 msgCde = ""
                 NumLigneMini = Max(Nz(lers("NumLigneERP_Mini"), 0), 10)
                 If NumLigneMini Mod 10 <> 0 Then NumLigneMini = Int(NumLigneMini / 10 + 1) * 10
+                NumLigneMiniInit = NumLigneMini
             End If
 
             msgCde = Nz(lers("MsgLigneCumul"), "")
@@ -305,10 +312,15 @@ Public Class F_ImportCdeVente
                 If Nz(.Cells("QteBesoin").Value, 0) <> 0 Then
                     Select Case Me.lSite.Text
                         Case "Laxou", "Soucy", "Casablanca"
+                            If lartCli <> lers("ArtCode_ERP") & lers("CodeClient") Then
+                                NumLigneMini = NumLigneMiniInit
+                                lartCli = lers("ArtCode_ERP") & lers("CodeClient")
+                            End If
+
                             If Nz(.Cells("NumLigneCde_ERP").Value, "0") <> "0" Then
                                 .Cells("NumLigne_Prop").Value = Nz(.Cells("NumLigneCde_ERP").Value, "")
                             Else
-                                If Nz(.Cells("NumLigneEDI_Tiers").Value, "0") <> "0" Then
+                                If Nz(.Cells("NumLigneEDI_Tiers").Value, "0") <> "0" And Nz(.Cells("NumLigneEDI_Tiers").Value, "0") <> "" Then
                                     .Cells("NumLigne_Prop").Value = Nz(.Cells("NumLigneEDI_Tiers").Value, "")
                                 Else
                                     .Cells("NumLigne_Prop").Value = NumLigneMini
@@ -500,7 +512,7 @@ Public Class F_ImportCdeVente
     Sub OptionAnoCdeInit(b As Boolean)
         optionG.Checked = b
         optionH.Checked = b
-        optionM.Checked = b
+        optionX.Checked = b
     End Sub
 
     Sub OptionContratInit(b As Boolean)
@@ -513,6 +525,7 @@ Public Class F_ImportCdeVente
         optionD.Checked = b
         optionL.Checked = b
         optionS.Checked = b
+        OptionM.Checked = b
     End Sub
 
     Public Sub MakeGridViewDoubleBuffered(ByVal dgv As DataGridView)
@@ -737,26 +750,26 @@ Public Class F_ImportCdeVente
 
         ''Mémorise les lignes 
         'sSql = "Select CliCode, NumCommande, LigneCommande from CommandeVente_Verrou WHERE UserLogin = '" & leUser.Login & "' "
-            'lers = SqlLit(sSql, conSqlEDI)
-            'While lers.Read
-            '    lesEncours &= lers("CliCode") & "#" & lers("NumCommande") & "#" & lers("LigneCommande") & "!"
-            'End While
-            'lers.Close()
+        'lers = SqlLit(sSql, conSqlEDI)
+        'While lers.Read
+        '    lesEncours &= lers("CliCode") & "#" & lers("NumCommande") & "#" & lers("LigneCommande") & "!"
+        'End While
+        'lers.Close()
 
-            'For i = 0 To Me.gImport.RowCount - 2
-            '    If Nz(Me.gImport.Rows(i).Cells(0).Value, False) = True Then
-            '        If Not lesContrats.Contains(Me.gImport.Rows(i).Cells("NumContrat_tiers").Value) Then lesContrats += ",'" & Me.gImport.Rows(i).Cells("NumContrat_tiers").Value & "'"
+        'For i = 0 To Me.gImport.RowCount - 2
+        '    If Nz(Me.gImport.Rows(i).Cells(0).Value, False) = True Then
+        '        If Not lesContrats.Contains(Me.gImport.Rows(i).Cells("NumContrat_tiers").Value) Then lesContrats += ",'" & Me.gImport.Rows(i).Cells("NumContrat_tiers").Value & "'"
 
-            '        'vérifie si la ligne n'est pas en cours
-            '        For Each s In lesEncours.Split("!")
-            '            If s.Contains(Me.gImport.Rows(i).Cells("CodeClient").Value & Me.gImport.Rows(i).Cells("NumCde_ERP").Value & Me.gImport.Rows(i).Cells("NumLigne_Prop").Value) Then
-            '                lesEncoursSelect &= Me.gImport.Rows(i).Cells("CodeClient").Value & "#" & Me.gImport.Rows(i).Cells("NumCde_ERP").Value & "#" & Me.gImport.Rows(i).Cells("NumLigne_Prop").Value & "#" & s.Split("#")(1) & "!"
-            '            End If
-            '        Next
-            '    End If
-            'Next
+        '        'vérifie si la ligne n'est pas en cours
+        '        For Each s In lesEncours.Split("!")
+        '            If s.Contains(Me.gImport.Rows(i).Cells("CodeClient").Value & Me.gImport.Rows(i).Cells("NumCde_ERP").Value & Me.gImport.Rows(i).Cells("NumLigne_Prop").Value) Then
+        '                lesEncoursSelect &= Me.gImport.Rows(i).Cells("CodeClient").Value & "#" & Me.gImport.Rows(i).Cells("NumCde_ERP").Value & "#" & Me.gImport.Rows(i).Cells("NumLigne_Prop").Value & "#" & s.Split("#")(1) & "!"
+        '            End If
+        '        Next
+        '    End If
+        'Next
 
-            Return lesEncoursSelect
+        Return lesEncoursSelect
     End Function
 
     Private Sub ArchiveTransfertCde()
@@ -923,4 +936,7 @@ Public Class F_ImportCdeVente
         F_ImportArchive.Dispose()
     End Sub
 
+    Private Sub tabImport_Click(sender As Object, e As EventArgs) Handles tabImport.Click
+
+    End Sub
 End Class
