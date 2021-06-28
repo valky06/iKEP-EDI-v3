@@ -64,9 +64,11 @@ Public Class F_ImportListe
             Me.gFichier.Rows.Add(oFileDialog.FileName, FileExtension(oFileDialog.FileName))
             Dim laCbx As DataGridViewComboBoxColumn = New DataGridViewComboBoxColumn
             laCbx = Me.gFichier.Columns(2)
-            If laCbx.Items.Count > 1 Then Me.gFichier.Rows(Me.gFichier.RowCount - 1).Cells("TypeTraitNom").Value = laCbx.Items(0)
-            Call VerifTraitement(Me.gFichier.RowCount - 1)
+            If laCbx.Items.Count > 0 Then
+                Me.gFichier.Rows(Me.gFichier.RowCount - 1).Cells("TypeTraitNom").Value = laCbx.Items(0)
             End If
+            Call VerifTraitement(Me.gFichier.RowCount - 1)
+        End If
     End Sub
 
     Private Sub TiersMoins_Click(sender As Object, e As EventArgs) Handles TiersMoins.Click
