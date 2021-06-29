@@ -32,5 +32,11 @@
     <Setting Name="CheminExportTOPS" Type="System.String" Scope="User">
       <Value Profile="(Default)">\\keptopsolidmtb1\IMPORT_EDI_CDE\</Value>
     </Setting>
+    <Setting Name="DelaiAfferme" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="DelaiSaisi" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -146,4 +146,10 @@ Public Class F_Main
     Private Sub sContext_Click(sender As Object, e As EventArgs) Handles sContext.Click
 
     End Sub
+
+    Private Sub ContrôlePrévisionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ContrôlePrévisionToolStripMenuItem.Click
+        fermetout()
+        F_CtrlPrev.MdiParent = Me
+        F_CtrlPrev.Show()
+    End Sub
 End Class

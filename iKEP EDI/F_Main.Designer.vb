@@ -41,6 +41,7 @@ Partial Class F_Main
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.mParam = New System.Windows.Forms.ToolStripMenuItem()
         Me.AideEnLigneToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContrôlePrévisionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.sStatus.SuspendLayout()
         Me.mGlobal.SuspendLayout()
         Me.SuspendLayout()
@@ -57,7 +58,7 @@ Partial Class F_Main
         'sLabel
         '
         Me.sLabel.Name = "sLabel"
-        Me.sLabel.Size = New System.Drawing.Size(1110, 17)
+        Me.sLabel.Size = New System.Drawing.Size(1141, 17)
         Me.sLabel.Spring = True
         Me.sLabel.Text = "Etat"
         Me.sLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft
@@ -84,7 +85,7 @@ Partial Class F_Main
         '
         'mGlobal
         '
-        Me.mGlobal.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mImport, Me.mExport, Me.mAfferme, Me.QuitterToolStripMenuItem, Me.ParamétrageToolStripMenuItem})
+        Me.mGlobal.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mImport, Me.mExport, Me.mAfferme, Me.QuitterToolStripMenuItem, Me.ParamétrageToolStripMenuItem, Me.ContrôlePrévisionToolStripMenuItem})
         Me.mGlobal.Location = New System.Drawing.Point(0, 0)
         Me.mGlobal.Name = "mGlobal"
         Me.mGlobal.Size = New System.Drawing.Size(1280, 24)
@@ -160,6 +161,12 @@ Partial Class F_Main
         Me.AideEnLigneToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.AideEnLigneToolStripMenuItem.Text = "Aide en ligne"
         '
+        'ContrôlePrévisionToolStripMenuItem
+        '
+        Me.ContrôlePrévisionToolStripMenuItem.Name = "ContrôlePrévisionToolStripMenuItem"
+        Me.ContrôlePrévisionToolStripMenuItem.Size = New System.Drawing.Size(116, 20)
+        Me.ContrôlePrévisionToolStripMenuItem.Text = "Contrôle Prévision"
+        '
         'F_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -199,4 +206,5 @@ Partial Class F_Main
     Friend WithEvents AideEnLigneToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TiersToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents sContext As ToolStripStatusLabel
+    Friend WithEvents ContrôlePrévisionToolStripMenuItem As ToolStripMenuItem
 End Class

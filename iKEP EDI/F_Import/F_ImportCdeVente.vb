@@ -312,20 +312,24 @@ Public Class F_ImportCdeVente
                 If Nz(.Cells("QteBesoin").Value, 0) <> 0 Then
                     Select Case Me.lSite.Text
                         Case "Laxou", "Soucy", "Casablanca"
-                            If lartCli <> lers("ArtCode_ERP") & lers("CodeClient") Then
-                                NumLigneMini = NumLigneMiniInit
-                                lartCli = lers("ArtCode_ERP") & lers("CodeClient")
-                            End If
+                            '                            If lartCli <> lers("ArtCode_ERP") & lers("CodeClient") Then
+                            '                            NumLigneMini = NumLigneMiniInit
+                            '                            lartCli = lers("ArtCode_ERP") & lers("CodeClient")
+                            '                End If
 
-                            If Nz(.Cells("NumLigneCde_ERP").Value, "0") <> "0" Then
-                                .Cells("NumLigne_Prop").Value = Nz(.Cells("NumLigneCde_ERP").Value, "")
-                            Else
-                                If Nz(.Cells("NumLigneEDI_Tiers").Value, "0") <> "0" And Nz(.Cells("NumLigneEDI_Tiers").Value, "0") <> "" Then
-                                    .Cells("NumLigne_Prop").Value = Nz(.Cells("NumLigneEDI_Tiers").Value, "")
-                                Else
-                                    .Cells("NumLigne_Prop").Value = NumLigneMini
-                                    NumLigneMini += 10
-                                End If
+                            'If Nz(.Cells("NumLigneCde_ERP").Value, "0") <> "0" Then
+                            '    .Cells("NumLigne_Prop").Value = Nz(.Cells("NumLigneCde_ERP").Value, "")
+                            'Else
+                            '    If Nz(.Cells("NumLigneEDI_Tiers").Value, "0") <> "0" And Nz(.Cells("NumLigneEDI_Tiers").Value, "0") <> "" Then
+                            '        .Cells("NumLigne_Prop").Value = Nz(.Cells("NumLigneEDI_Tiers").Value, "")
+                            '    Else
+                            '        .Cells("NumLigne_Prop").Value = NumLigneMini
+                            '        NumLigneMini += 10
+                            '    End If
+                            'End If
+                            If Nz(.Cells("QteBesoin").Value, 0) <> 0 Then
+                                .Cells("NumLigne_Prop").Value = NumLigneMini
+                                NumLigneMini += 10
                             End If
 
                         Case "Montauban", "Toulouse"
@@ -937,6 +941,14 @@ Public Class F_ImportCdeVente
     End Sub
 
     Private Sub tabImport_Click(sender As Object, e As EventArgs) Handles tabImport.Click
+
+    End Sub
+
+    Private Sub lTiers_Click(sender As Object, e As EventArgs) Handles lTiers.Click
+
+    End Sub
+
+    Private Sub tCommande_TextChanged(sender As Object, e As EventArgs) Handles tCommande.TextChanged
 
     End Sub
 End Class

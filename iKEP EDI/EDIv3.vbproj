@@ -30,8 +30,8 @@
     <ProductName>iKEP - EDI</ProductName>
     <PublisherName>iKEP</PublisherName>
     <SuiteName>iKEP - EDI</SuiteName>
-    <ApplicationRevision>8</ApplicationRevision>
-    <ApplicationVersion>3.0.3.8</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>3.0.4.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -70,7 +70,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>8B122D88F8F35E38C375AFA2849DBB3B35B87B20</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>08780C6583C1BD11434EC4826E6769CD4A96E434</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>
@@ -145,6 +145,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="F_CtrlPrev\F_CtrlPrev.Designer.vb">
+      <DependentUpon>F_CtrlPrev.vb</DependentUpon>
+    </Compile>
+    <Compile Include="F_CtrlPrev\F_CtrlPrev.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="F_Export\F_Export.Designer.vb">
       <DependentUpon>F_Export.vb</DependentUpon>
     </Compile>
@@ -288,6 +294,9 @@
     <EmbeddedResource Include="F_Afferm\F_Afferme.resx">
       <DependentUpon>F_Afferme.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_CtrlPrev\F_CtrlPrev.resx">
+      <DependentUpon>F_CtrlPrev.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="F_Export\F_Export.resx">
       <DependentUpon>F_Export.vb</DependentUpon>
