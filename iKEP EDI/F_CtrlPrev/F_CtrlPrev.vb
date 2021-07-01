@@ -17,10 +17,13 @@
 
         Select Case Me.lSIte.SelectedItem.Text
             Case "Soucy", "Laxou", "Casablanca"
-                Ssql = "select L.Nocommande NumCde,  nolignecommande NumLigne , codearticleprestto ArtCode, L.CodeClient CliCode , datesouhplustard DateLivre" _
+                Ssql = "select L.Nocommande NumCde,  nolignecommande NumLigne , L.codearticleprestto ArtCode, L.CodeClient CliCode , datesouhplustard DateLivre" _
                     & " , ResteLivrer QtePTF, QtePrevueOuFerme TypeCde , E.DateCreation Datecrea, C.nomClient CliNom" _
                     & " From comc L inner Join COME E on L.Nocommande=E.Nocommande And L.CodeClient = E.CodeClient" _
                     & " inner join CLI C on C.CodeClient = E.CodeClient " _
+                    & " inner join (" _
+                    & " Select codearticleprestto, max(DateCreation) as DateCrea from COME inner join COMC on COME.NoCommande=COMC.NoCommande where DateSouhPlusTard<'" & Me.dLiv.Value.ToString("dd/MM/yyyy") & "'" _
+                    & " group by codearticleprestto ) T  on T.CodeArticleprestto = L.CodeArticleprestto" _
                     & " where resteExpedier ='O'" _
                     & " and datesouhplustard<'" & Me.dLiv.Value.ToString("dd/MM/yyyy") & "'"
 
@@ -28,7 +31,7 @@
                 If Me.tCodeClient.Text <> "" Then Ssql &= " and L.codeCLient like '%" & Me.tCodeClient.Text & "%'"
                 If Me.tCodeArticle.Text <> "" Then Ssql &= " and L.codearticleprestto like '%" & Me.tCodeArticle.Text & "%'"
 
-                Ssql &= " order by E.codeclient, CodeArticleprestto, DateSouhPlusTard"
+                Ssql &= " order by  T.DateCrea desc ,L.CodeArticleprestto, DateSouhPlusTard,E.codeclient"
             Case "Montauban", "Toulouse"
                 Ssql = " select * From ( Select Case C.num_cmde NumCde,L.num_ligne NumLigne, Case when nvl(e.id_cmde_ligne,0)=0 then l.qte_total -nvl(l.qte_livre,0) else e.qte_total - nvl(e.qte_livre,0) end  as QtePTF," _
                     & " Case when nvl(e.id_cmde_ligne,0)=0 then e.date_livre  else l.date_livre end  as DateLivre , a.reference ArtNom, case when c.id_type_cmde = 2 then 'P' else 'F' end TypeCde,t_client.raison_sociale CliNom, t_client.code CliCode" _
@@ -52,14 +55,14 @@
 
             While lers.Read
 
-                If lId <> lers("CliCode") & "-" & lers("ArtCode") Then
-                    lId = lers("CliCode") & "-" & lers("ArtCode")
+                If lId <> lers("ArtCode") Then
+                    lId = lers("ArtCode")
                     gImport.Rows.Add(False)
                     gImport.Rows(gImport.RowCount - 1).DefaultCellStyle.BackColor = Color.LightGray
                     gImport.Rows(gImport.RowCount - 1).ReadOnly = True
                 End If
 
-                Me.gImport.Rows.Add(False, lers("CliCode"), lers("CliNom"), lers("ArtCode"), lers("DateLivre"), lers("TypeCde"), lers("NumCde"), lers("NumLigne"), lers("QtePTF"), lers("DateCrea"))
+                Me.gImport.Rows.Add(False, lers("ArtCode"), lers("DateLivre"), lers("TypeCde"), lers("QtePTF"), lers("NumCde"), lers("NumLigne"), lers("CliCode"), lers("CliNom"), lers("DateCrea"))
 
                 'Cde créer dans le délai
                 If DateDiff(DateInterval.Day, lers("DateCrea"), Now) < Val(Me.tDelaiSaisie.Text) Then

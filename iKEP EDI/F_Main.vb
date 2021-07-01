@@ -122,7 +122,7 @@ Public Class F_Main
     End Sub
 
     Private Sub AideEnLigneToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AideEnLigneToolStripMenuItem.Click
-        LienOuvre("https://keptechnologies.sharepoint.com/:u:/s/MS-APP/BI/EQLhxw804L9Mu8XFw9eBwP8BIJ7s4U3tiFRbxIbg4XVkFw?e=NRTu34")
+        '   LienOuvre("https://keptechnologies.sharepoint.com/:u:/s/MS-APP/BI/EQLhxw804L9Mu8XFw9eBwP8BIJ7s4U3tiFRbxIbg4XVkFw?e=NRTu34")
         ' f_web.ShowDialog()
     End Sub
 

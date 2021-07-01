@@ -10,7 +10,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>WindowsApplication1.My.MyApplication</StartupObject>
     <RootNamespace>WindowsApplication1</RootNamespace>
-    <AssemblyName>iKEP EDI</AssemblyName>
+    <AssemblyName>iKEP EDI v3</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -27,11 +27,11 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ProductName>iKEP - EDI</ProductName>
+    <ProductName>iKEP - EDI v3</ProductName>
     <PublisherName>iKEP</PublisherName>
-    <SuiteName>iKEP - EDI</SuiteName>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>3.0.4.0</ApplicationVersion>
+    <SuiteName>iKEP - EDI v3</SuiteName>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>3.0.4.2</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -44,7 +44,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>iKEP EDI.xml</DocumentationFile>
+    <DocumentationFile>iKEP EDI v3.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
@@ -54,7 +54,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>iKEP EDI.xml</DocumentationFile>
+    <DocumentationFile>iKEP EDI v3.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -91,7 +91,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'test2|x86'">
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x86\test2\</OutputPath>
-    <DocumentationFile>iKEP EDI.xml</DocumentationFile>
+    <DocumentationFile>iKEP EDI v3.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <DebugType>pdbonly</DebugType>

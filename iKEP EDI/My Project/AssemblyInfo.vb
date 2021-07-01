@@ -8,10 +8,10 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("iKEP - EDI")>
+<Assembly: AssemblyTitle("iKEP - EDI v3")>
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("iKEP")>
-<Assembly: AssemblyProduct("iKEP - EDI")>
+<Assembly: AssemblyProduct("iKEP - EDI v3")>
 <Assembly: AssemblyCopyright("Copyright © 2020")>
 <Assembly: AssemblyTrademark("")> 
 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("3.0.4.0")>
-<Assembly: AssemblyFileVersion("3.0.4.0")>
+<Assembly: AssemblyVersion("3.0.4.2")>
+<Assembly: AssemblyFileVersion("3.0.4.2")>
