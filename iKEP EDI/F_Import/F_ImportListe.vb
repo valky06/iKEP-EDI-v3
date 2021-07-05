@@ -184,7 +184,7 @@ Public Class F_ImportListe
                                 XLSheetData.Cells(laligne + 1, laDerCol).formula = leParam.Split("|")(j).Split(";")(1)
                                 XLSheetData.Cells(laligne + 1, laDerCol).Copy()
                                 'XLSheetData.Range(XLSheetData.Cells(3, 50), XLSheetData.Cells(25, 50)).Select()
-                                XLSheetData.Range(XLSheetData.Cells(laligne + 2, laDerCol), XLSheetData.Cells(XLSheetData.UsedRange.Rows.Count, laDerCol)).Select()
+                                XLSheetData.Range(XLSheetData.Cells(laligne + 2, laDerCol), XLSheetData.Cells(XLSheetData.UsedRange.Rows.Count + 1, laDerCol)).Select()
                                 XLSheetData.Paste()
                                 XLSheetKEP.Cells(2, j).formular1c1 = "='" & Txt2sql(lafeuille) & "'!R[" & (laligne - 1).ToString & "]C" & laDerCol
                                 '                                XLSheetKEP.Cells(2, j).formula = leParam.Split("|")(j).Split(";")(1)
@@ -195,7 +195,7 @@ Public Class F_ImportListe
                     'Colle sur les autres lignes
                     XLSheetKEP.Activate()
                     XLSheetKEP.Range(XLSheetKEP.Cells(2, 1), XLSheetKEP.Cells(2, leParam.Split("|").Count - 1)).Copy()
-                    XLSheetKEP.Range(XLSheetKEP.Cells(3, 1), XLSheetKEP.Cells(XLApp.Worksheets(lafeuille).UsedRange.rows.count, 1)).Select()
+                    XLSheetKEP.Range(XLSheetKEP.Cells(3, 1), XLSheetKEP.Cells(XLApp.Worksheets(lafeuille).UsedRange.Rows.Count, 1)).Select()
                     XLSheetKEP.Paste()
 
                     For j = 1 To leParam.Split("|").Count - 1
