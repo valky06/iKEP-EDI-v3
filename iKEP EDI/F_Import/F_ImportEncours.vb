@@ -1,4 +1,6 @@
 ﻿Public Class F_ImportEncours
+    Public leSiteId As Integer
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Me.Dispose()
     End Sub
@@ -13,9 +15,10 @@
         Me.gEncours.Rows.Clear()
 
         lesParam.Add(New SSISParam("UserLogin", leUser.Login, "PACKAGE"))
-        SSISexecute(leUser.RepSSIS, "DM_IN_CDV_Integration.dtsx", lesParam, "Actualisation commandes ...")
+        lesParam.Add(New SSISParam("SiteId", leSiteId, "PACKAGE"))
+        SSISexecute(leUser.RepSSIS, "DM_IN_CDV_IntegreEnCours.dtsx", lesParam, "Actualisation commandes ...")
 
-        sSql = "select CliCode, NoCommande, NbLigne from CommandeVente_Integration where UserLogin ='" & leUser.Login & "'"
+        sSql = "select CliCode, NoCommande, NbLigne from CommandeVente_Integration where Siteid =" & leSiteId
         leRs = SqlLit(sSql, conSqlEDI)
         While leRs.Read
             Me.gEncours.Rows.Add(leRs("CliCode"), leRs("NoCommande"), leRs("NbLigne"))

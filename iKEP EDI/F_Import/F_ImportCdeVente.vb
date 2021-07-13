@@ -880,6 +880,8 @@ Public Class F_ImportCdeVente
 
     Private Sub lSite_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lSite.SelectedIndexChanged
         If Me.lSite.SelectedIndex >= 0 Then
+
+            If Me.lSite.SelectedItem.text = "Montauban" Or Me.lSite.SelectedItem.text = "Toulouse" Then Me.bEncours.Enabled = False Else Me.bEncours.Enabled = True
             bRetraiter.Enabled = True
 
             'vérifie que le site choisi et le dernier site du traitement
@@ -949,6 +951,14 @@ Public Class F_ImportCdeVente
     End Sub
 
     Private Sub tCommande_TextChanged(sender As Object, e As EventArgs) Handles tCommande.TextChanged
+
+    End Sub
+
+    Private Sub bEncours_Click(sender As Object, e As EventArgs) Handles bEncours.Click
+        F_ImportEncours.ShowDialog()
+    End Sub
+
+    Private Sub lSite_Click(sender As Object, e As EventArgs) Handles lSite.Click
 
     End Sub
 End Class

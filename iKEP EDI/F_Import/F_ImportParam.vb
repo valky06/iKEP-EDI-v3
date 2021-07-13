@@ -44,7 +44,18 @@ Public Class F_ImportParam
             Dim xlWorkSheet As Worksheet
             xlApp.Workbooks.Open(LeFichier, 0, False)
             cSheet.Items.Clear()
-            For Each xlWorkSheet In xlApp.Sheets : cSheet.Items.Add(New ListItem(xlWorkSheet.Name, xlWorkSheet.Name)) : Next
+            For i = 1 To xlApp.Sheets.Count
+                'Attention, certaines feuilles ne sont pas des feuilles de calcul mais des graf... il faut donc tester
+                Try
+                    xlWorkSheet = xlApp.Sheets(i)
+                    cSheet.Items.Add(New ListItem(xlWorkSheet.Name, xlWorkSheet.Name))
+
+                Catch ex As Exception
+
+                End Try
+
+            Next
+
             CloseExcel(xlApp)
             xlApp = Nothing
 
