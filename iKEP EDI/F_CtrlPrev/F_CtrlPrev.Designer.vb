@@ -36,6 +36,16 @@ Partial Class F_CtrlPrev
         Me.tDelaiAff = New System.Windows.Forms.TextBox()
         Me.bAfficher = New System.Windows.Forms.Button()
         Me.gImport = New System.Windows.Forms.DataGridView()
+        Me.SelContrat = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.CodeArt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateLiv = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TypeCde = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.QtePTF = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NumCde = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NumLigne = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CodeClient = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NomClient = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateCrea = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.tDelaiSaisie = New System.Windows.Forms.TextBox()
@@ -49,16 +59,7 @@ Partial Class F_CtrlPrev
         Me.tMsgAff = New System.Windows.Forms.TextBox()
         Me.tMsgDate = New System.Windows.Forms.TextBox()
         Me.tMsgPrev = New System.Windows.Forms.TextBox()
-        Me.SelContrat = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.CodeArt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateLiv = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TypeCde = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.QtePTF = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NumCde = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NumLigne = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CodeClient = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NomClient = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateCrea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.bSuppr = New System.Windows.Forms.Button()
         CType(Me.gImport, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -164,6 +165,89 @@ Partial Class F_CtrlPrev
         Me.gImport.Size = New System.Drawing.Size(1201, 397)
         Me.gImport.TabIndex = 59
         Me.gImport.TabStop = False
+        '
+        'SelContrat
+        '
+        Me.SelContrat.FillWeight = 15.0!
+        Me.SelContrat.HeaderText = "Sel"
+        Me.SelContrat.Name = "SelContrat"
+        Me.SelContrat.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'CodeArt
+        '
+        Me.CodeArt.FillWeight = 40.0!
+        Me.CodeArt.HeaderText = "Article KEP"
+        Me.CodeArt.Name = "CodeArt"
+        Me.CodeArt.ReadOnly = True
+        Me.CodeArt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'DateLiv
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.Format = "d"
+        Me.DateLiv.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DateLiv.FillWeight = 30.0!
+        Me.DateLiv.HeaderText = "Date Liv"
+        Me.DateLiv.Name = "DateLiv"
+        '
+        'TypeCde
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.TypeCde.DefaultCellStyle = DataGridViewCellStyle3
+        Me.TypeCde.FillWeight = 15.0!
+        Me.TypeCde.HeaderText = "Type Cde"
+        Me.TypeCde.Name = "TypeCde"
+        Me.TypeCde.ReadOnly = True
+        Me.TypeCde.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'QtePTF
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle4.Format = "N2"
+        Me.QtePTF.DefaultCellStyle = DataGridViewCellStyle4
+        Me.QtePTF.FillWeight = 25.0!
+        Me.QtePTF.HeaderText = "Qté PTF"
+        Me.QtePTF.Name = "QtePTF"
+        Me.QtePTF.ReadOnly = True
+        Me.QtePTF.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'NumCde
+        '
+        Me.NumCde.FillWeight = 30.0!
+        Me.NumCde.HeaderText = "N°Cde"
+        Me.NumCde.Name = "NumCde"
+        Me.NumCde.ReadOnly = True
+        Me.NumCde.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'NumLigne
+        '
+        Me.NumLigne.FillWeight = 20.0!
+        Me.NumLigne.HeaderText = "N° Ligne"
+        Me.NumLigne.Name = "NumLigne"
+        Me.NumLigne.ReadOnly = True
+        Me.NumLigne.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'CodeClient
+        '
+        Me.CodeClient.FillWeight = 30.0!
+        Me.CodeClient.HeaderText = "Code Client"
+        Me.CodeClient.Name = "CodeClient"
+        Me.CodeClient.ReadOnly = True
+        Me.CodeClient.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'NomClient
+        '
+        Me.NomClient.HeaderText = "Client"
+        Me.NomClient.Name = "NomClient"
+        '
+        'DateCrea
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle5.Format = "d"
+        Me.DateCrea.DefaultCellStyle = DataGridViewCellStyle5
+        Me.DateCrea.FillWeight = 30.0!
+        Me.DateCrea.HeaderText = "Date Saisie"
+        Me.DateCrea.Name = "DateCrea"
         '
         'Label2
         '
@@ -290,88 +374,17 @@ Partial Class F_CtrlPrev
         Me.tMsgPrev.Text = "Prév avant Ferme"
         Me.tMsgPrev.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'SelContrat
+        'bSuppr
         '
-        Me.SelContrat.FillWeight = 15.0!
-        Me.SelContrat.HeaderText = "Sel"
-        Me.SelContrat.Name = "SelContrat"
-        Me.SelContrat.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'CodeArt
-        '
-        Me.CodeArt.FillWeight = 40.0!
-        Me.CodeArt.HeaderText = "Article KEP"
-        Me.CodeArt.Name = "CodeArt"
-        Me.CodeArt.ReadOnly = True
-        Me.CodeArt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'DateLiv
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.Format = "d"
-        Me.DateLiv.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DateLiv.FillWeight = 30.0!
-        Me.DateLiv.HeaderText = "Date Liv"
-        Me.DateLiv.Name = "DateLiv"
-        '
-        'TypeCde
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.TypeCde.DefaultCellStyle = DataGridViewCellStyle3
-        Me.TypeCde.FillWeight = 15.0!
-        Me.TypeCde.HeaderText = "Type Cde"
-        Me.TypeCde.Name = "TypeCde"
-        Me.TypeCde.ReadOnly = True
-        Me.TypeCde.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'QtePTF
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle4.Format = "N2"
-        Me.QtePTF.DefaultCellStyle = DataGridViewCellStyle4
-        Me.QtePTF.FillWeight = 25.0!
-        Me.QtePTF.HeaderText = "Qté PTF"
-        Me.QtePTF.Name = "QtePTF"
-        Me.QtePTF.ReadOnly = True
-        Me.QtePTF.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'NumCde
-        '
-        Me.NumCde.FillWeight = 30.0!
-        Me.NumCde.HeaderText = "N°Cde"
-        Me.NumCde.Name = "NumCde"
-        Me.NumCde.ReadOnly = True
-        Me.NumCde.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'NumLigne
-        '
-        Me.NumLigne.FillWeight = 20.0!
-        Me.NumLigne.HeaderText = "N° Ligne"
-        Me.NumLigne.Name = "NumLigne"
-        Me.NumLigne.ReadOnly = True
-        Me.NumLigne.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'CodeClient
-        '
-        Me.CodeClient.FillWeight = 30.0!
-        Me.CodeClient.HeaderText = "Code Client"
-        Me.CodeClient.Name = "CodeClient"
-        Me.CodeClient.ReadOnly = True
-        Me.CodeClient.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'NomClient
-        '
-        Me.NomClient.HeaderText = "Client"
-        Me.NomClient.Name = "NomClient"
-        '
-        'DateCrea
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle5.Format = "d"
-        Me.DateCrea.DefaultCellStyle = DataGridViewCellStyle5
-        Me.DateCrea.FillWeight = 30.0!
-        Me.DateCrea.HeaderText = "Date Saisie"
-        Me.DateCrea.Name = "DateCrea"
+        Me.bSuppr.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.bSuppr.Image = Global.WindowsApplication1.My.Resources.Resources.btransfert_fw
+        Me.bSuppr.Location = New System.Drawing.Point(1102, 12)
+        Me.bSuppr.Name = "bSuppr"
+        Me.bSuppr.Size = New System.Drawing.Size(111, 45)
+        Me.bSuppr.TabIndex = 77
+        Me.bSuppr.Text = "Supprimer"
+        Me.bSuppr.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
+        Me.bSuppr.UseVisualStyleBackColor = True
         '
         'F_CtrlPrev
         '
@@ -379,6 +392,7 @@ Partial Class F_CtrlPrev
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1225, 497)
         Me.ControlBox = False
+        Me.Controls.Add(Me.bSuppr)
         Me.Controls.Add(Me.tMsgDate)
         Me.Controls.Add(Me.tMsgPrev)
         Me.Controls.Add(Me.tMsgSaisie)
@@ -439,4 +453,5 @@ Partial Class F_CtrlPrev
     Friend WithEvents CodeClient As DataGridViewTextBoxColumn
     Friend WithEvents NomClient As DataGridViewTextBoxColumn
     Friend WithEvents DateCrea As DataGridViewTextBoxColumn
+    Friend WithEvents bSuppr As Button
 End Class

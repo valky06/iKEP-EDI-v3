@@ -144,6 +144,51 @@
     Private Sub tDelaiAff_TextChanged(sender As Object, e As EventArgs) Handles tDelaiAff.TextChanged
 
     End Sub
+
+    Private Sub bSuppr_Click(sender As Object, e As EventArgs) Handles bSuppr.Click
+        Dim sSql As String = ""
+        '        Dim d As Date
+        Dim StatutLigne As String = ""
+        Dim typeBesoin As String = ""
+        Dim lesParam As New List(Of SSISParam)
+        Dim limport As Integer = -1
+
+        ' ...
+        If MsgBox("Supprimer les commandes sélectionnées ?", MsgBoxStyle.OkCancel Or MsgBoxStyle.Question) = MsgBoxResult.Ok Then
+            Try
+                'Ecrit dans la table Transfert
+                For i = 0 To Me.gImport.RowCount - 2
+
+                    With Me.gImport.Rows(i)
+                        If Nz(.Cells(0).Value, False) = True Then
+
+                            sSql &= "INSERT INTO CommandeVente_Transfert ( ImportId, DateBesoin, QteBesoin, NumCde_ERP, NumLigne_ERP, DateCde, QteCde, ArtCode_ERP, NumLigne_Prop,DateTransfert, StatutTransfert, CodeClient, StatutAffiche,siteId )" _
+                            & " VALUES (" & limport _
+                            & ", '" & Nz(.Cells("DateLiv").Value, "") & "', 0" & Txt2sql(Nz(.Cells("QtePTF").Value, "0")) & ", " _
+                            & "'" & Nz(.Cells("NumCde").Value, "") & "', '" & Nz(.Cells("NumLigne").Value, "") & "', '" & Nz(.Cells("DateLiv").Value, "") & "', 0" & Txt2sql(Nz(.Cells("QtePTF").Value, "0")) & ", " _
+                            & "'" & Nz(.Cells("CodeArt").Value, "") & "', '', '" & Now & "', 'D', '" & .Cells("CodeClient").Value & "', 1," & Me.lSIte.SelectedItem.value & ");"
+                        End If
+                    End With
+                Next i
+
+                SqlDo(sSql, conSqlEDI)
+
+
+                My.Settings.Reload()
+                lesParam.Clear()
+                lesParam.Add(New SSISParam("ImportId", limport, "PACKAGE"))
+                lesParam.Add(New SSISParam("SiteId", lSIte.SelectedItem.Value, "PACKAGE"))
+                lesParam.Add(New SSISParam("UserLogin", leUser.Login, "PACKAGE"))
+                SSISexecute(leUser.RepSSIS, "DM_IN_CDV_Integre.dtsx", lesParam, "Ecriture des données -> ERP")
+
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+
+            AfficheCde()
+        End If
+    End Sub
 End Class
 
 
