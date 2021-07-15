@@ -32,18 +32,19 @@
                 If Me.tCodeArticle.Text <> "" Then Ssql &= " and L.codearticleprestto like '%" & Me.tCodeArticle.Text & "%'"
 
                 Ssql &= " order by  T.DateCrea desc ,L.CodeArticleprestto, DateSouhPlusTard,E.codeclient"
+
             Case "Montauban", "Toulouse"
-                Ssql = " select * From ( Select Case C.num_cmde NumCde,L.num_ligne NumLigne, Case when nvl(e.id_cmde_ligne,0)=0 then l.qte_total -nvl(l.qte_livre,0) else e.qte_total - nvl(e.qte_livre,0) end  as QtePTF," _
-                    & " Case when nvl(e.id_cmde_ligne,0)=0 then e.date_livre  else l.date_livre end  as DateLivre , a.reference ArtNom, case when c.id_type_cmde = 2 then 'P' else 'F' end TypeCde,t_client.raison_sociale CliNom, t_client.code CliCode" _
-                    & " From t_cmde_ligne L inner Join t_cmde C on C.id_cmde=l.id_cmde" _
-                    & " Left Join t_cmde_cad E on e.id_cmde_ligne=l.id_cmde_ligne  Left Join t_article A on a.id_article=l.id_article" _
-                & " Left Join t_type_cmde T on t.id_type_cmde = c.id_type_cmde  Left Join t_client  on t_client.id_client = C.id_client" _
-                & " where c.id_company In(1, 2) And  extract( year from  l.date_livre)>2019  And  nvl(l.qte_livre,0) < nvl(l.qte_total,0)  And  NVL(l.b_closed,0)=0 And nvl(c.b_closed,0)=0 ) T" _
-                & " where DateLivre <'" & Me.dLiv.Value.ToString("dd/MM/yyyy") & "'"
-
-
-                If Me.tCodeClient.Text <> "" Then Ssql &= " and CliNom like '%" & Me.tCodeClient.Text & "%'"
-                If Me.tCodeArticle.Text <> "" Then Ssql &= " and ArtCode like '%" & Me.tCodeArticle.Text & "%'"
+                Ssql = "SELECT  NUMCDE,NUMLIGNE, QTEPTF,  DATELIVRE , ARTCODE, TYPECDE ,CLINOM, CLICODE, DateCrea FROM ( SELECT C.NUM_CMDE NUMCDE,L.NUM_LIGNE NUMLIGNE, " _
+                & " Case WHEN NVL(E.ID_CMDE_LIGNE,0)=0 THEN L.QTE_TOTAL -NVL(L.QTE_LIVRE,0) ELSE E.QTE_TOTAL - NVL(E.QTE_LIVRE,0) END  AS QTEPTF, " _
+                & " CASE WHEN NVL(E.ID_CMDE_LIGNE,0)=0 THEN L.DATE_LIVRE ELSE E.DATE_LIVRE END  AS DATELIVRE , A.REFERENCE ARTCODE, CASE WHEN C.ID_TYPE_CMDE = 2 THEN 'P' ELSE 'F' END TYPECDE" _
+                & " ,T_CLIENT.RAISON_SOCIALE CLINOM, T_CLIENT.CODE CLICODE, l.DATE_CREATION DateCrea " _
+                & " FROM T_CMDE_LIGNE L INNER JOIN T_CMDE C ON C.ID_CMDE=L.ID_CMDE LEFT JOIN T_CMDE_CAD E ON E.ID_CMDE_LIGNE=L.ID_CMDE_LIGNE " _
+                & " LEFT JOIN T_ARTICLE A ON A.ID_ARTICLE=L.ID_ARTICLE LEFT JOIN T_TYPE_CMDE T ON T.ID_TYPE_CMDE = C.ID_TYPE_CMDE  LEFT JOIN T_CLIENT  ON T_CLIENT.ID_CLIENT = C.ID_CLIENT " _
+                & " WHERE C.ID_COMPANY IN(1, 2)  And  EXTRACT( YEAR FROM  L.DATE_LIVRE)>2019  And  NVL(L.QTE_LIVRE,0) < NVL(L.QTE_TOTAL,0)  And  NVL(L.B_CLOSED,0)=0 And NVL(C.B_CLOSED,0)=0 ) " _
+                & " WHERE DATELIVRE <'" & Me.dLiv.Value.ToString("yyyy-MM-dd") & "'"
+                If Me.tCodeClient.Text <> "" Then Ssql &= " AND CLINOM like '%" & Me.tCodeClient.Text & "%'"
+                If Me.tCodeArticle.Text <> "" Then Ssql &= " AND ARTCODE like '%" & Me.tCodeArticle.Text & "%'"
+                Ssql &= "  order by  DateCrea desc ,ARTCODE, DATELIVRE,CLICODE"
         End Select
 
                 Try
@@ -123,7 +124,7 @@
             Case "Soucy" : ConnexionInit("Provider=SQLOLEDB.1;Persist Security Info=True;Password=SilmoMacro;User ID=ZCBN;Server=sqlc2;Database=KTISSOUCY;Persist Security Info=True;", conSqlERP)
             Case "Laxou" : ConnexionInit("Provider=SQLOLEDB.1;Persist Security Info=True;Password=SilmoMacro;User ID=ZCBN;Server=sqlc2;Database=KTISLAXOU;Persist Security Info=True;", conSqlERP)
             Case "Casablanca" : ConnexionInit("Provider=SQLOLEDB.1;Persist Security Info=True;Password=SilmoMacro;User ID=ZCBN;Server=sqlc2;Database=KMTM;Persist Security Info=True;", conSqlERP)
-            Case "Montauban" : ConnexionInit("provider = OraOLEDB.Oracle.1;data source=TOP;User ID=TOPERP;Password=TOPERP", conSqlERP)
+            Case "Montauban", "Toulouse" : ConnexionInit("provider = OraOLEDB.Oracle.1;data source=TOP;User ID=TOPERP;Password=TOPERP", conSqlERP)
         End Select
         Call AfficheCde()
     End Sub
